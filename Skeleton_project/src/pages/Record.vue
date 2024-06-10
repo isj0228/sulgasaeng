@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>내역</h2>
+    <h2>내역임</h2>
 </div>
 </template>
 
