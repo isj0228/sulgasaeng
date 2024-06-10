@@ -1,5 +1,29 @@
 ## 슬기로운 가계부 생활
-test
+
+### Pull Reqeust
+fork 이후의 작업.
+1. 자신의 로컬 환경에서 이름으로 브랜치 생성 후 작업하기
+
+   ```
+   ex)
+   git branch woohyeong // pc에 branch 생성 ※원격 Repository 환경에 생성된 것은 아님
+   git checkout woohyeong // 작업할 브랜치로 전환 (main -> woohyeong)
+   또는 git switch woohyeong // checkout이랑 같은 명령어
+   ```
+
+2. 작업 후 push
+
+   ```
+   git add .   // 작업한 내용을 stage로 올리기
+   git commit -m"message"   // commit message 작성
+   git push origin woohyeong // 원격(fork한 자신의 repo)에 자신의 이름 branch가 있으면 거기에 push 없으면 자동으로 branch가 생성되며 push
+   ```
+   ![image](https://github.com/wxxhyeong/kb-study/assets/78301292/6403b0f7-3690-425e-af89-a01eb78843ab)
+
+3. push 이후 web에서 pull request 작성
+   ![image](https://github.com/wxxhyeong/kb-study/assets/78301292/1483839a-743f-4970-9098-2d962421d6d0)
+
+
 ### Git Commit Convention
 
 ##### 메시지 구조
