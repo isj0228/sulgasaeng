@@ -10,47 +10,36 @@
                   <div class="text-center">
                     <h2 class="h4 text-gray-900 mb-4">Edit Profile</h2>
                   </div>
-                  <div class="profile-info text-center mb-4">
+                  <div class="profile-info mb-4">
                     <!-- 이미지 관련 코드 -->
-                    <img class="rounded-circle mb-3" :src="profilePhoto" alt="Profile Photo" style="width: 100px; height: 100px;">
-                    <div class="profile-details">
-                      <h6>Douglas McGee</h6>
+                    <img class="rounded-circle mb-3" :src="userInfo.image" alt="Profile Photo"
+                      style="width: 100px; height: 100px;">
+                    <!-- <div class="profile-details">
+                      <h6>{{userInfo.name}}</h6>
                       <h6 id="image" @click="triggerFileInput">Change profile photo</h6>
                       <input type="file" ref="fileInput" @change="onFileChange" style="display: none;">
-                    </div>
+                    </div> -->
                   </div>
-                  <form class="user" @submit.prevent="saveChanges">
+                  <form class="user" @submit.prevent="updateHandler">
                     <div class="form-group">
-                      <h5>Username</h5>
-                      <input v-model="username" type="text" class="form-control form-control-user" placeholder="Enter Username">
+                      <label for="inputName" class="form-label">Username</label>
+                      <input v-model="userInfo.name" type="text" class="form-control form-control-user" id="inputName">
                     </div>
                     <div class="form-group">
-                      <h5>Email</h5>
-                      <input v-model="email" type="email" class="form-control form-control-user" placeholder="Enter Email">
+                      <label for="inputEmail" class="form-label">Useremail</label>
+                      <input v-model="userInfo.email" type="email" class="form-control form-control-user"
+                        id="inputEmail">
                     </div>
                     <div class="form-group">
-                      <h5>URLs</h5>
-                      <ul class="list-unstyled">
-                        <li v-for="(link, index) in links" :key="link.id" class="mb-2">
-                          <input v-model="link.url" type="text" class="form-control form-control-user mb-2" :placeholder="index === links.length - 1 ? 'Newly added' : ''">
-                          <button v-if="index === links.length - 1" type="button" class="btn btn-primary btn-circle mr-2" @click="addURL" title="Add Another">
-                            <i class="fas fa-plus"></i>
-                          </button>
-                          <button v-if="index > 0" type="button" class="btn btn-danger btn-circle" @click="removeURL(index)" title="Remove">
-                            <i class="fas fa-minus"></i>
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="form-group">
-                      <h5>Bio</h5>
-                      <textarea v-model="bio" rows="5" class="form-control square-textarea" placeholder="What are you up to"></textarea>
+                      <label for="inputPhone" class="form-label">Userphone</label>
+                      <input v-model="userInfo.phone" type="phone" class="form-control form-control-user"
+                        id="inputPhone">
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">Save Changes</button>
                   </form>
-                  <div v-if="saveMessage" class="alert alert-success mt-4">
+                  <!-- <div v-if="saveMessage" class="alert alert-success mt-4">
                     Your user profile has been saved
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -61,7 +50,10 @@
   </div>
 </template>
 
-<script>
+<!-- <script>
+import { defineComponent, ref, onMounted, computed } from 'vue'
+import { useBudgetStore } from '@/stores/UserStore.js'
+
 export default {
   data() {
     return {
@@ -87,11 +79,11 @@ export default {
           this.profilePhoto = e.target.result;
         };
         reader.readAsDataURL(file);
-      } 
+      }
     },
     saveChanges() {
       this.saveMessage = true;
-      
+
       setTimeout(() => {
         this.saveMessage = false;
       }, 3000);
@@ -106,15 +98,46 @@ export default {
     }
   }
 }
+
+</script> -->
+
+<script setup>
+import { computed, reactive } from 'vue';
+import { useUserStore } from '@/stores/userStore.js'
+import { useRouter, useRoute } from 'vue-router';
+// const userStore = useUserStore();
+const userInfo = computed(() => useUserStore().userInfo);
+const { updateUser } = useUserStore();
+const router = useRouter();
+
+const updateHandler = () => {
+
+  let { name, email, phone, image } = userInfo.value;
+  if (!name || name.trim() === "") {
+    alert('이름은 반드시 입력해야 합니다');
+    return;
+  } else if (!email || email.trim() === "") {
+    alert('이메일은 반드시 입력해야 합니다');
+    return;
+  } else if (!phone || phone.trim() === "") {
+    alert('전화번호는 반드시 입력해야 합니다');
+    return;
+  } else if (!image || image.trim() === "") {
+    alert('사진은 반드시 입력해야 합니다');
+    return;
+  }
+  updateUser({ name, email, phone, image }, () => {
+    // router.push('/user');
+    alert('변경이 완료되었습니다.')
+  });
+}
 </script>
 
 <style>
 .profile-info {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
-#image {
-  color:lightgrey;
-}
+
 </style>
