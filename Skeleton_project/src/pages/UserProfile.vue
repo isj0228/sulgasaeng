@@ -12,8 +12,9 @@
                   </div>
                   <div class="profile-info mb-4">
                     <!-- 이미지 관련 코드 -->
-                    <img class="rounded-circle mb-3" :src="userInfo.image" alt="Profile Photo"
-                      style="width: 100px; height: 100px;">
+                    <img class="profile-photo rounded-circle mb-3" :src="userInfo.image" alt="Profile Photo"
+                      style="width: 100px; height: 100px;" @click="triggerFileInput">
+                    <input type="file" ref="fileInput" @change="onFileChange" style="display: none;">
                     <!-- <div class="profile-details">
                       <h6>{{userInfo.name}}</h6>
                       <h6 id="image" @click="triggerFileInput">Change profile photo</h6>
@@ -102,9 +103,10 @@ export default {
 </script> -->
 
 <script setup>
-import { computed, reactive } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import { useUserStore } from '@/stores/userStore.js'
 import { useRouter, useRoute } from 'vue-router';
+
 // const userStore = useUserStore();
 const userInfo = computed(() => useUserStore().userInfo);
 const { updateUser } = useUserStore();
@@ -131,6 +133,26 @@ const updateHandler = () => {
     alert('변경이 완료되었습니다.')
   });
 }
+
+// 상태 정의
+const fileInput = ref(null);
+
+// 메서드 정의
+const triggerFileInput = () => {
+  fileInput.value.click();
+};
+
+const onFileChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      userInfo.value.image = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
 </script>
 
 <style>
@@ -140,4 +162,13 @@ const updateHandler = () => {
   justify-content: center;
 }
 
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  transition: box-shadow 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.profile-photo:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+}
 </style>
