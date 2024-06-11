@@ -87,7 +87,7 @@ export default {
           this.profilePhoto = e.target.result;
         };
         reader.readAsDataURL(file);
-      }
+      } 
     },
     saveChanges() {
       this.saveMessage = true;
