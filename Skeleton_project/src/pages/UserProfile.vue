@@ -14,7 +14,7 @@
                     <!-- 이미지 관련 코드 -->
                     <img class="rounded-circle mb-3" :src="profilePhoto" alt="Profile Photo" style="width: 100px; height: 100px;">
                     <div class="profile-details">
-                      <h6>Helena Hills</h6>
+                      <h6>Douglas McGee</h6>
                       <h6 id="image" @click="triggerFileInput">Change profile photo</h6>
                       <input type="file" ref="fileInput" @change="onFileChange" style="display: none;">
                     </div>
