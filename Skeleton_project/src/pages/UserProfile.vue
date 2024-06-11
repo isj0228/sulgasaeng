@@ -4,7 +4,6 @@
       <div class="col-xl-10 col-lg-12 col-md-9">
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
             <div class="row">
               <div class="col-lg-12">
                 <div class="p-5">
@@ -12,7 +11,7 @@
                     <h2 class="h4 text-gray-900 mb-4">Edit Profile</h2>
                   </div>
                   <div class="profile-info text-center mb-4">
-                    <!-- Adjust the width and height of the image using the style attribute -->
+                    <!-- 이미지 관련 코드 -->
                     <img class="rounded-circle mb-3" :src="profilePhoto" alt="Profile Photo" style="width: 100px; height: 100px;">
                     <div class="profile-details">
                       <h6>Helena Hills</h6>
@@ -66,7 +65,7 @@
 export default {
   data() {
     return {
-      profilePhoto: "/img/undraw_profile_1.svg", // Initial profile photo URL
+      profilePhoto: "/img/undraw_profile_1.svg", //초기 프로필
       username: "",
       email: "",
       bio: "",
@@ -91,12 +90,8 @@ export default {
       }
     },
     saveChanges() {
-      // Perform any save operations here (e.g., API calls to save the data)
-      
-      // Show the save confirmation message
       this.saveMessage = true;
       
-      // Hide the save message after 3 seconds
       setTimeout(() => {
         this.saveMessage = false;
       }, 3000);
