@@ -22,8 +22,8 @@
 
             <li class="nav-item dropdown no-arrow">
                 <router-link class="nav-link dropdown-toggle" to="/user">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                    <img class="img-profile rounded-circle" src="/img/undraw_profile.svg"> 
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ userInfo.name }}</span>
+                    <img class="img-profile rounded-circle" :src="userInfo.image"> 
                 </router-link>
             </li>
         </ul>
@@ -43,6 +43,16 @@ export default {
         });
     }
 }
+</script>
+
+<script setup>
+import { computed, ref } from 'vue';
+import { useUserStore } from '@/stores/userStore.js'
+// const userInfo = useUserStore().userInfo.name;
+// console.log(userInfo)
+// const userStore = useUserStore();
+const userInfo = computed(() => useUserStore().userInfo);
+
 </script>
 
 <style lang="scss" scoped></style>
