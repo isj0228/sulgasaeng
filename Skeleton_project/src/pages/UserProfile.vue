@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                       <h5>Bio</h5>
-                      <textarea v-model="bio" rows="5" class="form-control form-control-user square-textarea" placeholder="What are you up to"></textarea>
+                      <textarea v-model="bio" rows="5" class="form-control square-textarea" placeholder="What are you up to"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">Save Changes</button>
                   </form>
