@@ -42,6 +42,6 @@ export const useBudgetStore = defineStore('budgetStore', {
             } catch (error) {
                 console.error('Failed to delete transactions:', error);
             }
-    }
+        },
 }
 });
