@@ -1,17 +1,7 @@
-<script setup>
-import Topbar from '@/components/Topbar.vue'
-import Sidebar from '@/components/Sidebar.vue'
-</script>
-
 <template>
-  <div id="wrapper">
-    <Sidebar />
-    <div id="content-wrapper" class="d-flex flex-column">
-      <div id="content">
-        <Topbar />
-      </div>
-    </div>
-  </div>
+<div>
+  <h2>대시보드</h2>
+</div>
 </template>
 
 <script>
