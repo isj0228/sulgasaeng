@@ -1,48 +1,54 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
+import { reactive, computed } from 'vue';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/user';
+const user = "user/";
+const index = "1";
+const BASEURI = "http://localhost:3000/";
 
-export const useUserStore = defineStore('userStore', {
-    state: () => ({
-    transactions: []
-    }),
-    actions: {
-        async getTransactions() {   
-            try {
-                const response = await axios.get(API_URL);
-                this.transactions = response.data;
-            } catch (error) {
-                console.error('Failed to fetch transactions:', error);
+export const useUserStore = defineStore("userStore", () => {
+    const state = reactive({
+        userInfo: {},
+        isLoading: false
+    })
+
+    const fetchUser = async () => {
+        state.isLoading = true;
+        try{
+            const response = await axios.get(BASEURI + `${user}${index}`);
+            if(response.status === 200) {
+                state.userInfo = response.data;
+            }else{
+                alert('데이터 조회 실패');
             }
-        },
-        async addTransaction(transaction) {
-            try {
-                const response = await axios.post(API_URL, transaction);
-                this.transactions.push(response.data);
-            } catch (error) {
-                console.error('Failed to add transaction:', error);
-            }
-        },
-        async updateTransaction(id, updatedTransaction) {
-            try {
-                const response = await axios.put(`${API_URL}/${id}`, updatedTransaction);
-                const index = this.transactions.findIndex(transaction => transaction.id === id);
-                if (index !== -1) {
-                this.transactions[index] = response.data;
-                }
-            } catch (error) {
-                console.error('Failed to update transaction:', error);
-            }
-        },
-        async deleteTransaction(id) {
-            try {
-                await axios.delete(`${API_URL}/${id}`);
-                this.transactions = this.transactions.filter(transaction => transaction.id !== id);
-            } catch (error) {
-                console.error('Failed to delete transactions:', error);
-            }
+            state.isLoading = false;
+        } catch(err){
+            alert('에러 발생 : '+err);
+            state.isLoading = false;
+        }
     }
-}
-});
 
+    const updateUser = async({name,email,phone,image},successCallback) => {
+
+        state.isLoading = true;
+        try{
+            const payload = {name,email,phone,image};
+            const response = await axios.put(BASEURI + `${user}${index}`,payload)
+            if(response.status===200){
+                // let index = state.userInfo.findIndex((user)=>user.id === id);
+                state.userInfo = {name,email,phone,image};
+                successCallback();
+            }else {
+                alert('user 변경 실패');
+            }
+        }catch(error){
+            alert('에러발생 :' + error);
+            state.isLoading = false;
+        }
+    }
+
+    const userInfo = computed(()=>state.userInfo);
+    const isLoading = computed(()=>state.isLoading);
+
+    return { userInfo, isLoading, fetchUser, updateUser };
+})

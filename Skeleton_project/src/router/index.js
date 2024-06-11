@@ -10,7 +10,6 @@ const routes = [
     { path: '/', component: Dashboard },
     { path: '/record', component: Record },
     { path: '/chart', component: Chart },
-    { path: '/setting', component: UserProfile },
 ];
 
 const router = createRouter({

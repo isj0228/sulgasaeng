@@ -1,8 +1,3 @@
-<script setup>
-import Topbar from '@/components/Topbar.vue'
-import Sidebar from '@/components/Sidebar.vue'
-</script>
-
 <template>
   <div id="wrapper">
     <Sidebar />
@@ -17,6 +12,15 @@ import Sidebar from '@/components/Sidebar.vue'
   </div>
 </template>
 
+<script setup>
+import Topbar from '@/components/Topbar.vue'
+import Sidebar from '@/components/Sidebar.vue'
+
+import { useUserStore } from '@/stores/userStore.js'
+const { fetchUser } = useUserStore();
+fetchUser();
+
+</script>
 
 <!-- <script setup>
 // import { reactive, computed, provide } from 'vue';
