@@ -13,6 +13,7 @@ export default {
   components: {
     Record // Record 컴포넌트를 등록합니다
   }
+  
 }
 </script>
 
