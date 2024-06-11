@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                       <h5>Bio</h5>
-                      <textarea v-model="bio" rows="5" class="form-control form-control-user square-textarea" placeholder="What are you up to"></textarea>
+                      <textarea v-model="bio" rows="5" class="form-control square-textarea" placeholder="What are you up to"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">Save Changes</button>
                   </form>
@@ -65,7 +65,7 @@
 export default {
   data() {
     return {
-      profilePhoto: "/img/undraw_profile_1.svg", //초기 프로필
+      profilePhoto: "/img/undraw_profile.svg", //초기 프로필
       username: "",
       email: "",
       bio: "",
@@ -87,7 +87,7 @@ export default {
           this.profilePhoto = e.target.result;
         };
         reader.readAsDataURL(file);
-      }
+      } 
     },
     saveChanges() {
       this.saveMessage = true;
@@ -113,5 +113,8 @@ export default {
   display: flex; 
   align-items: center; 
   justify-content: center;
+}
+#image {
+  color:lightgrey;
 }
 </style>
