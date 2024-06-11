@@ -32,8 +32,14 @@
                     <div class="form-group">
                       <h5>URLs</h5>
                       <ul class="list-unstyled">
-                        <li v-for="link in links" :key="link.id" class="mb-2">
-                          <input v-model="link.url" type="text" class="form-control form-control-user" placeholder="Enter URL">
+                        <li v-for="(link, index) in links" :key="link.id" class="mb-2">
+                          <input v-model="link.url" type="text" class="form-control form-control-user mb-2" :placeholder="index === links.length - 1 ? 'Newly added' : ''">
+                          <button v-if="index === links.length - 1" type="button" class="btn btn-primary btn-circle mr-2" @click="addURL" title="Add Another">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                          <button v-if="index > 0" type="button" class="btn btn-danger btn-circle" @click="removeURL(index)" title="Remove">
+                            <i class="fas fa-minus"></i>
+                          </button>
                         </li>
                       </ul>
                     </div>
@@ -65,8 +71,7 @@ export default {
       email: "",
       bio: "",
       links: [
-        { id: 1, url: "https://example.com" },
-        { id: 2, url: "https://example.org" }
+        { id: 1, url: "https://example.com" }
       ],
       saveMessage: false
     };
@@ -95,29 +100,23 @@ export default {
       setTimeout(() => {
         this.saveMessage = false;
       }, 3000);
+    },
+    addURL() {
+      this.links.push({ id: Date.now(), url: "" });
+    },
+    removeURL(index) {
+      if (this.links.length > 1) {
+        this.links.splice(index, 1);
+      }
     }
   }
-};
+}
 </script>
 
 <style>
 .profile-info {
-  display: flex; /* Use flexbox layout */
-  align-items: center; /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
-}
-
-.profile-details {
-  margin-left: 10px; /* Add space between image and text */
-}
-
-#image {
-  color: rgba(207, 198, 198, 0.5);
-  cursor: pointer; /* Change cursor to pointer to indicate clickable element */
-}
-
-/* Custom class to remove border-radius from textarea */
-.square-textarea {
-  border-radius: 0 !important;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }
 </style>
