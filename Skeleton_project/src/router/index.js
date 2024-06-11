@@ -6,7 +6,7 @@ import Chart from "@/pages/Chart.vue";
 import UserProfile from "@/pages/UserProfile.vue";
 
 const routes = [
-    { path: '/User', component: UserProfile},
+    { path: '/user', component: UserProfile},
     { path: '/', component: Dashboard },
     { path: '/record', component: Record },
     { path: '/chart', component: Chart },

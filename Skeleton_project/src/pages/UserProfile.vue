@@ -87,7 +87,7 @@ export default {
           this.profilePhoto = e.target.result;
         };
         reader.readAsDataURL(file);
-      }
+      } 
     },
     saveChanges() {
       this.saveMessage = true;
@@ -113,5 +113,8 @@ export default {
   display: flex; 
   align-items: center; 
   justify-content: center;
+}
+#image {
+  color:lightgrey;
 }
 </style>
