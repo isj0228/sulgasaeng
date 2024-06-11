@@ -1,13 +1,14 @@
 <template>
-<div>
-    <h2>내역임</h2>
-</div>
+    <div>
+
+    </div>
 </template>
 
-<script>
-export default {
-
-}
+<script setup>
+import { defineComponent } from "vue";
+import { useTransactionStore } from "../../stores/budge_Store";
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+
+</style>
