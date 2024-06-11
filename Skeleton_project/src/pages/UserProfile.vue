@@ -4,7 +4,6 @@
       <div class="col-xl-10 col-lg-12 col-md-9">
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
             <div class="row">
               <div class="col-lg-12">
                 <div class="p-5">
@@ -12,7 +11,7 @@
                     <h2 class="h4 text-gray-900 mb-4">Edit Profile</h2>
                   </div>
                   <div class="profile-info text-center mb-4">
-                    <!-- Adjust the width and height of the image using the style attribute -->
+                    <!-- 이미지 관련 코드 -->
                     <img class="rounded-circle mb-3" :src="profilePhoto" alt="Profile Photo" style="width: 100px; height: 100px;">
                     <div class="profile-details">
                       <h6>Helena Hills</h6>
@@ -32,8 +31,14 @@
                     <div class="form-group">
                       <h5>URLs</h5>
                       <ul class="list-unstyled">
-                        <li v-for="link in links" :key="link.id" class="mb-2">
-                          <input v-model="link.url" type="text" class="form-control form-control-user" placeholder="Enter URL">
+                        <li v-for="(link, index) in links" :key="link.id" class="mb-2">
+                          <input v-model="link.url" type="text" class="form-control form-control-user mb-2" :placeholder="index === links.length - 1 ? 'Newly added' : ''">
+                          <button v-if="index === links.length - 1" type="button" class="btn btn-primary btn-circle mr-2" @click="addURL" title="Add Another">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                          <button v-if="index > 0" type="button" class="btn btn-danger btn-circle" @click="removeURL(index)" title="Remove">
+                            <i class="fas fa-minus"></i>
+                          </button>
                         </li>
                       </ul>
                     </div>
@@ -60,13 +65,12 @@
 export default {
   data() {
     return {
-      profilePhoto: "/img/undraw_profile_1.svg", // Initial profile photo URL
+      profilePhoto: "/img/undraw_profile_1.svg", //초기 프로필
       username: "",
       email: "",
       bio: "",
       links: [
-        { id: 1, url: "https://example.com" },
-        { id: 2, url: "https://example.org" }
+        { id: 1, url: "https://example.com" }
       ],
       saveMessage: false
     };
@@ -86,38 +90,28 @@ export default {
       }
     },
     saveChanges() {
-      // Perform any save operations here (e.g., API calls to save the data)
-      
-      // Show the save confirmation message
       this.saveMessage = true;
       
-      // Hide the save message after 3 seconds
       setTimeout(() => {
         this.saveMessage = false;
       }, 3000);
+    },
+    addURL() {
+      this.links.push({ id: Date.now(), url: "" });
+    },
+    removeURL(index) {
+      if (this.links.length > 1) {
+        this.links.splice(index, 1);
+      }
     }
   }
-};
+}
 </script>
 
 <style>
 .profile-info {
-  display: flex; /* Use flexbox layout */
-  align-items: center; /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
-}
-
-.profile-details {
-  margin-left: 10px; /* Add space between image and text */
-}
-
-#image {
-  color: rgba(207, 198, 198, 0.5);
-  cursor: pointer; /* Change cursor to pointer to indicate clickable element */
-}
-
-/* Custom class to remove border-radius from textarea */
-.square-textarea {
-  border-radius: 0 !important;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }
 </style>
