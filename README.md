@@ -1,4 +1,5 @@
 ## 슬기로운 가계부 생활
+test2
 
 ### Pull Reqeust
 fork 이후의 작업.
@@ -22,6 +23,7 @@ fork 이후의 작업.
 
 3. push 이후 web에서 pull request 작성
    ![image](https://github.com/wxxhyeong/kb-study/assets/78301292/1483839a-743f-4970-9098-2d962421d6d0)
+
 
 
 ### Git Commit Convention
