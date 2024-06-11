@@ -40,7 +40,7 @@ export const useUserStore = defineStore('userStore', {
                 await axios.delete(`${API_URL}/${id}`);
                 this.transactions = this.transactions.filter(transaction => transaction.id !== id);
             } catch (error) {
-                console.error('Failed to delete transaction:', error);
+                console.error('Failed to delete transactions:', error);
             }
     }
 }
