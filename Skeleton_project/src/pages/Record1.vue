@@ -1,6 +1,5 @@
 <template>
     <div>
-      <h1>내역조회</h1>
       <div v-if="loading">Loading...</div>
       <div v-else>
         <table class="table table-striped"  @click="navigateToRecord">
