@@ -58,18 +58,18 @@ import { useBudgetStore } from '@/stores/budgetStore.js'
         budgetStore.addTransaction(newTransaction.value)
         newTransaction.value = { date: '', type: 'income', amount: '', category: '', desc: '' }
       }
-  
+      onMounted(async () => {
+        await budgetStore.getTransactions() // 데이터 가져오기
+      })
       return {
         transactions: budgetStore.transactions,
         newTransaction,
         addNewTransaction,
         deleteTransaction: budgetStore.deleteTransaction
       }
+
     },
-    created() {
-      const budgetStore = useBudgetStore()
-      budgetStore.getTransactions()
-    }
+
   })
   </script>
   
