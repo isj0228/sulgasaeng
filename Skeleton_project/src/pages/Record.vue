@@ -3,7 +3,7 @@
       <h1>내역조회</h1>
       <div v-if="loading">Loading...</div>
       <div v-else>
-        <table>
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Date</th>
@@ -17,32 +17,44 @@
           <tbody>
             <tr v-for="transaction in paginatedTransactions" :key="transaction.id">
               <td>{{ transaction.date }}</td>
-              <td>{{ transaction.type }}</td>
+              <td :class="transaction.type === 'income' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
               <td>{{ transaction.amount }}</td>
               <td>{{ transaction.category }}</td>
               <td>{{ transaction.desc }}</td>
-              <td><button @click="deleteTransaction(transaction.id)">Delete</button></td>
+              <td><button class="btn btn-danger btn-sm" @click="deleteTransaction(transaction.id)">X</button></td>
             </tr>
           </tbody>
         </table>
-        <div>
-          <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
-          <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+        <div class="d-flex justify-content-between mb-3">
+          <button class="btn btn-primary" @click="prevPage" :disabled="currentPage === 1">Previous</button>
+          <span>Page {{ currentPage }} of {{ totalPages }}</span>
+          <button class="btn btn-primary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
         </div>
-        <form @submit.prevent="addNewTransaction">
-        <input v-model="newTransaction.date" type="date" placeholder="Date" required />
-        <select v-model="newTransaction.type" required>
-          <option value="income">Income</option>
-          <option value="outcome">Outcome</option>
-        </select>
-        <input v-model="newTransaction.amount" type="number" placeholder="Amount" required />
-        <input v-model="newTransaction.category" placeholder="Category" required />
-        <input v-model="newTransaction.desc" placeholder="Description" required />
-        <button type="submit">Add Transaction</button>
-      </form>
+        <form @submit.prevent="addNewTransaction" class="row g-3">
+          <div class="col-md-2">
+            <input v-model="newTransaction.date" type="date" class="form-control" placeholder="Date" required />
+          </div>
+          <div class="col-md-2">
+            <select v-model="newTransaction.type" class="form-select" required>
+              <option value="income">Income</option>
+              <option value="outcome">Outcome</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <input v-model="newTransaction.amount" type="number" class="form-control" placeholder="Amount" required />
+          </div>
+          <div class="col-md-3">
+            <input v-model="newTransaction.category" class="form-control" placeholder="Category" required />
+          </div>
+          <div class="col-md-3">
+            <input v-model="newTransaction.desc" class="form-control" placeholder="Description" required />
+          </div>
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-success">Add Transaction</button>
+          </div>
+        </form>
       </div>
     </div>
-
   </template>
   
   <script>
@@ -76,7 +88,7 @@
   
       const addNewTransaction = async () => {
         await budgetStore.addTransaction(newTransaction.value)
-        newTransaction.value = { date: '', type: '', amount: '', category: '', desc: '' }
+        newTransaction.value = { date: '', type: 'income', amount: '', category: '', desc: '' }
       }
   
       const deleteTransaction = async (id) => {
@@ -139,8 +151,7 @@
     margin-bottom: 20px;
   }
   
-  form input {
-    margin-right: 10px;
+  form input, form select {
     padding: 5px;
   }
   

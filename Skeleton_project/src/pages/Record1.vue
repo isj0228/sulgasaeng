@@ -3,7 +3,7 @@
       <h1>내역조회</h1>
       <div v-if="loading">Loading...</div>
       <div v-else>
-        <table>
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Date</th>
@@ -16,7 +16,7 @@
           <tbody>
             <tr v-for="transaction in recentTransactions" :key="transaction.id">
               <td>{{ transaction.date }}</td>
-              <td>{{ transaction.type }}</td>
+              <td :class="transaction.type === 'income' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
               <td>{{ transaction.amount }}</td>
               <td>{{ transaction.category }}</td>
               <td>{{ transaction.desc }}</td>
@@ -66,7 +66,6 @@
   }
   
   th, td {
-    border: 1px solid #ddd;
     padding: 8px;
   }
   
