@@ -164,7 +164,7 @@
             <!-- Nav Item - User Information -->
             <!-- 프로필사진으로 수정할 부분 to, span, img-->
             <li class="nav-item dropdown no-arrow">
-                <router-link class="nav-link dropdown-toggle" to="/chart">
+                <router-link class="nav-link dropdown-toggle" to="/setting">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                     <img class="img-profile rounded-circle" src="/img/undraw_profile.svg"> 
                 </router-link>
