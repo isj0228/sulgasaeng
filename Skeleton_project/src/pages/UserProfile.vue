@@ -114,4 +114,7 @@ export default {
   align-items: center; 
   justify-content: center;
 }
+#image {
+  color:lightgrey;
+}
 </style>
