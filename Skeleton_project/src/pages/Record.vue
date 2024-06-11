@@ -33,7 +33,7 @@
             <input v-model="newTransaction.date" type="date" class="form-control" placeholder="Date" required />
           </div>
           <div class="col-md-2">
-            <select v-model="newTransaction.type" class="form-select" required>
+            <select v-model="newTransaction.type" class="form-select col" required>
               <option value="income">Income</option>
               <option value="outcome">Outcome</option>
             </select>
@@ -48,7 +48,7 @@
             <input v-model="newTransaction.desc" class="form-control" placeholder="Description" required />
           </div>
           <div class="col-md-12">
-            <button type="submit" class="btn btn-success">Add Transaction</button>
+            <button type="submit" class="btn btn-success">내역 추가</button>
           </div>
         </form>
       </div>
