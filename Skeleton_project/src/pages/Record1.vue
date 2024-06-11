@@ -9,7 +9,6 @@
               <th>Type</th>
               <th>Amount</th>
               <th>Category</th>
-              <th>Description</th>
             </tr>
           </thead>
           <tbody>
@@ -17,8 +16,7 @@
               <td>{{ transaction.date }}</td>
               <td :class="transaction.type === 'income' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
               <td>{{ transaction.amount }}</td>
-              <td>{{ transaction.category }}</td>
-              <td>{{ transaction.desc }}</td>
+              <td><span class="badge bg-secondary text-light">{{ transaction.category }}</span></td>
             </tr>
           </tbody>
         </table>
