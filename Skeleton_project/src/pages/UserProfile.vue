@@ -103,17 +103,14 @@ export default {
 </script> -->
 
 <script setup>
-import { computed, reactive, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useUserStore } from '@/stores/userStore.js'
-import { useRouter, useRoute } from 'vue-router';
 
 // const userStore = useUserStore();
 const userInfo = computed(() => useUserStore().userInfo);
 const { updateUser } = useUserStore();
-const router = useRouter();
 
 const updateHandler = () => {
-
   let { name, email, phone, image } = userInfo.value;
   if (!name || name.trim() === "") {
     alert('이름은 반드시 입력해야 합니다');
@@ -129,7 +126,6 @@ const updateHandler = () => {
     return;
   }
   updateUser({ name, email, phone, image }, () => {
-    // router.push('/user');
     alert('변경이 완료되었습니다.')
   });
 }
