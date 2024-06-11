@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/user';
 
-export const useTransactionStore = defineStore('userStore', {
+export const useUserStore = defineStore('userStore', {
     state: () => ({
     transactions: []
     }),

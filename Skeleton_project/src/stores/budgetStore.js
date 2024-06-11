@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/budget-list';
 
-export const useTransactionStore = defineStore('budget-listStore', {
+export const useBudgetStore = defineStore('budgetStore', {
     state: () => ({
     transactions: []
     }),
