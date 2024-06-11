@@ -65,7 +65,7 @@
 export default {
   data() {
     return {
-      profilePhoto: "/img/undraw_profile_1.svg", //초기 프로필
+      profilePhoto: "/img/undraw_profile.svg", //초기 프로필
       username: "",
       email: "",
       bio: "",

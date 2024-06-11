@@ -37,18 +37,6 @@
         <button type="submit">Add Transaction</button>
       </form>
     </div>
-<<<<<<< HEAD
-</template>
-
-<script setup>
-import { defineComponent } from "vue";
-import { useTransactionStore } from "../../stores/budge_Store";
-</script>
-
-<style scoped>
-
-</style>
-=======
   </template>
   
   <script>
@@ -103,4 +91,3 @@ import { useBudgetStore } from '@/stores/budgetStore.js'
   }
   </style>
   
->>>>>>> 214ae6139b9b4a57d89e03945d0da3430f99b7c5
