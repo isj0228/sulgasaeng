@@ -11,17 +11,15 @@
               <th>Amount</th>
               <th>Category</th>
               <th>Description</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="transaction in paginatedTransactions" :key="transaction.id">
+            <tr v-for="transaction in paginatedTransactions" :key="transaction.id" @click="selectTransaction(transaction)">
               <td>{{ transaction.date }}</td>
               <td :class="transaction.type === 'income' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
               <td>{{ transaction.amount }}</td>
               <td>{{ transaction.category }}</td>
               <td>{{ transaction.desc }}</td>
-              <td><button class="btn btn-danger btn-sm" @click="deleteTransaction(transaction.id)">X</button></td>
             </tr>
           </tbody>
         </table>
@@ -54,19 +52,27 @@
           </div>
         </form>
       </div>
+  
+      <!-- 모달 컴포넌트 사용 -->
+      <TransactionModal :transaction="selectedTransaction" @delete-transaction="deleteTransactionFromModal" @update-transaction="updateTransaction" />
     </div>
   </template>
   
   <script>
   import { defineComponent, ref, onMounted, computed } from 'vue'
   import { useBudgetStore } from '@/stores/budgetStore.js'
+  import TransactionModal from '@/components/TransactionModal.vue'
   
   export default defineComponent({
+    components: {
+      TransactionModal
+    },
     setup() {
       const budgetStore = useBudgetStore()
       const loading = ref(true)
       const currentPage = ref(1)
       const itemsPerPage = 10
+      const selectedTransaction = ref({})
   
       const newTransaction = ref({
         date: '',
@@ -95,6 +101,22 @@
         await budgetStore.deleteTransaction(id)
       }
   
+      const deleteTransactionFromModal = async (id) => {
+        await deleteTransaction(id)
+        const modal = bootstrap.Modal.getInstance(document.getElementById('transactionModal'))
+        if (modal) {
+          modal.hide()
+        }
+      }
+  
+      const updateTransaction = async (updatedTransaction) => {
+        await budgetStore.updateTransaction(updatedTransaction.id, updatedTransaction)
+        const modal = bootstrap.Modal.getInstance(document.getElementById('transactionModal'))
+        if (modal) {
+          modal.hide()
+        }
+      }
+  
       const prevPage = () => {
         if (currentPage.value > 1) {
           currentPage.value -= 1
@@ -105,6 +127,12 @@
         if (currentPage.value < totalPages.value) {
           currentPage.value += 1
         }
+      }
+  
+      const selectTransaction = (transaction) => {
+        selectedTransaction.value = { ...transaction } // Deep copy to avoid direct mutation
+        const modal = new bootstrap.Modal(document.getElementById('transactionModal'))
+        modal.show()
       }
   
       onMounted(async () => {
@@ -124,7 +152,11 @@
         nextPage,
         newTransaction,
         addNewTransaction,
-        deleteTransaction
+        deleteTransaction,
+        selectedTransaction,
+        selectTransaction,
+        deleteTransactionFromModal,
+        updateTransaction
       }
     }
   })
