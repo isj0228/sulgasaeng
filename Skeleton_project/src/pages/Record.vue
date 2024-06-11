@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>Budget Transactions</h1>
+      <h6>내역조회</h6>
       <table>
         <thead>
           <tr>
@@ -40,7 +40,7 @@
   </template>
   
   <script>
-  import { defineComponent, ref } from 'vue'
+  import { defineComponent, ref, onMounted } from 'vue'
 import { useBudgetStore } from '@/stores/budgetStore.js'  
   export default defineComponent({
     setup() {
