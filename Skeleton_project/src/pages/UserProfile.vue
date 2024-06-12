@@ -12,8 +12,9 @@
                   </div>
                   <div class="profile-info mb-4">
                     <!-- 이미지 관련 코드 -->
-                    <img class="rounded-circle mb-3" :src="userInfo.image" alt="Profile Photo"
-                      style="width: 100px; height: 100px;">
+                    <img class="profile-photo rounded-circle mb-3" :src="userInfo.image" alt="Profile Photo"
+                      style="width: 100px; height: 100px;" @click="triggerFileInput">
+                    <input type="file" ref="fileInput" @change="onFileChange" style="display: none;">
                     <!-- <div class="profile-details">
                       <h6>{{userInfo.name}}</h6>
                       <h6 id="image" @click="triggerFileInput">Change profile photo</h6>
@@ -22,18 +23,19 @@
                   </div>
                   <form class="user" @submit.prevent="updateHandler">
                     <div class="form-group">
-                      <label for="inputName" class="form-label">Username</label>
-                      <input v-model="userInfo.name" type="text" class="form-control form-control-user" id="inputName">
+                      <label for="nameInput" class="form-label">Username</label>
+                      <input ref="nameInput" id="nameInput" :value="userInfo.name" type="text"
+                        class="form-control form-control-user">
                     </div>
                     <div class="form-group">
-                      <label for="inputEmail" class="form-label">Useremail</label>
-                      <input v-model="userInfo.email" type="email" class="form-control form-control-user"
-                        id="inputEmail">
+                      <label for="emailInput" class="form-label">Useremail</label>
+                      <input ref="emailInput" id="emailInput" :value="userInfo.email" type="email"
+                        class="form-control form-control-user">
                     </div>
                     <div class="form-group">
-                      <label for="inputPhone" class="form-label">Userphone</label>
-                      <input v-model="userInfo.phone" type="phone" class="form-control form-control-user"
-                        id="inputPhone">
+                      <label for="phoneInput" class="form-label">Userphone</label>
+                      <input ref="phoneInput" id="phoneInput" :value="userInfo.phone" type="phone"
+                        class="form-control form-control-user">
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">Save Changes</button>
                   </form>
@@ -50,69 +52,27 @@
   </div>
 </template>
 
-<!-- <script>
-import { defineComponent, ref, onMounted, computed } from 'vue'
-import { useBudgetStore } from '@/stores/UserStore.js'
-
-export default {
-  data() {
-    return {
-      profilePhoto: "/img/undraw_profile.svg", //초기 프로필
-      username: "",
-      email: "",
-      bio: "",
-      links: [
-        { id: 1, url: "https://example.com" }
-      ],
-      saveMessage: false
-    };
-  },
-  methods: {
-    triggerFileInput() {
-      this.$refs.fileInput.click();
-    },
-    onFileChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.profilePhoto = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    },
-    saveChanges() {
-      this.saveMessage = true;
-
-      setTimeout(() => {
-        this.saveMessage = false;
-      }, 3000);
-    },
-    addURL() {
-      this.links.push({ id: Date.now(), url: "" });
-    },
-    removeURL(index) {
-      if (this.links.length > 1) {
-        this.links.splice(index, 1);
-      }
-    }
-  }
-}
-
-</script> -->
-
 <script setup>
-import { computed, reactive } from 'vue';
+import { computed, ref } from 'vue';
 import { useUserStore } from '@/stores/userStore.js'
-import { useRouter, useRoute } from 'vue-router';
-// const userStore = useUserStore();
+
 const userInfo = computed(() => useUserStore().userInfo);
 const { updateUser } = useUserStore();
-const router = useRouter();
+
+// 상태 정의
+const fileInput = ref(null);
+const nameInput = ref(null);
+const emailInput = ref(null);
+const phoneInput = ref(null);
 
 const updateHandler = () => {
+  const inputValues = {
+    name: nameInput.value.value,
+    email: emailInput.value.value,
+    phone: phoneInput.value.value,
+  };
 
-  let { name, email, phone, image } = userInfo.value;
+  let { name, email, phone, image } = inputValues;
   if (!name || name.trim() === "") {
     alert('이름은 반드시 입력해야 합니다');
     return;
@@ -126,11 +86,30 @@ const updateHandler = () => {
     alert('사진은 반드시 입력해야 합니다');
     return;
   }
-  updateUser({ name, email, phone, image }, () => {
-    // router.push('/user');
+  updateUser({ ...inputValues }, () => {
     alert('변경이 완료되었습니다.')
   });
 }
+
+
+
+// 메서드 정의
+const triggerFileInput = () => {
+  fileInput.value.click();
+};
+
+const onFileChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      userInfo.value.image = e.target.result;
+      
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
 </script>
 
 <style>
@@ -140,4 +119,15 @@ const updateHandler = () => {
   justify-content: center;
 }
 
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  transition: box-shadow 0.3s ease;
+  /* 부드러운 전환 효과 */
+}
+
+.profile-photo:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* 그림자 효과 */
+}
 </style>
