@@ -51,10 +51,13 @@
 
 <script setup>
 import {reactive, ref} from 'vue'
-import { useBudgetStore } from '@/stores/budgetStore.js'  
+import { useBudgetStore } from '@/stores/budgetStore.js'
+import {monthlyOutput} from '@/service/monthlyInput.js'
 
 
 const date = ref(new Date());
+
+monthlyOutput("2024","06");
 
 const newTransaction = ref({
     date: '',
