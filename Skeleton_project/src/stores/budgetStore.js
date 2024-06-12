@@ -17,6 +17,7 @@ export const useBudgetStore = defineStore('budgetStore', {
     // 거래 내역을 받아오는 비동기 메서드
     async getTransactions() {
       try {
+        console.log("호출!!")
         const response = await axios.get(API_URL);
         this.transactions = response.data;
         this.filteredTransactions = this.transactions; // 초기값 설정
