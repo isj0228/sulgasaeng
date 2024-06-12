@@ -100,10 +100,7 @@ export default defineComponent({
     }
 
     const saveChanges = () => {
-<<<<<<< HEAD
       //옵션에서 선택 된게 추가일 경우
-=======
->>>>>>> 5aabe278f3d8abef5b974786bad4a599553868a1
       if (selectedCategory.value === 'add-new') {
         editableTransaction.value.category = newCategory.value
       }
