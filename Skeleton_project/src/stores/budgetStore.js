@@ -5,11 +5,12 @@ const API_URL = 'http://localhost:3000/budget-list';
 
 export const useBudgetStore = defineStore('budgetStore', {
     state: () => ({
-    transactions: []
+    transactions: [],
     }),
     actions: {
         async getTransactions() {   
             try {
+                console.log("호출")
                 const response = await axios.get(API_URL);
                 this.transactions = response.data;
             } catch (error) {

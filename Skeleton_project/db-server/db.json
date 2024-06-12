@@ -88,6 +88,22 @@
       "amount": 10999,
       "category": "근로소득",
       "desc": "월급"
+    },
+    {
+      "id": "9817",
+      "date": "2024-06-13",
+      "type": "outcome",
+      "amount": 10000,
+      "category": "식비",
+      "desc": "짜장면"
+    },
+    {
+      "id": "6cc9",
+      "date": "2024-06-26",
+      "type": "outcome",
+      "amount": 10000,
+      "category": "식비",
+      "desc": "버억"
     }
   ]
 }
