@@ -1,9 +1,10 @@
 <template>
-  <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
+  <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="transactionModalLabel">Transaction Details</h5>
+          <h5 class="modal-title" id="transactionModalLabel">내역 상세</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -37,7 +38,7 @@
           </div>
           <div class="mb-3">
             <label for="transactionDesc" class="form-label">Description</label>
-            <input id="transactionDesc" v-model="editableTransaction.desc" class="form-control">
+            <textarea v-model="editableTransaction.desc" class="form-control" id="transactionDesc" rows="3"></textarea>
           </div>
         </div>
         <div class="modal-footer">
@@ -99,6 +100,7 @@ export default defineComponent({
     }
 
     const saveChanges = () => {
+      //옵션에서 선택 된게 추가일 경우
       if (selectedCategory.value === 'add-new') {
         editableTransaction.value.category = newCategory.value
       }
