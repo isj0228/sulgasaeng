@@ -1,9 +1,10 @@
 <template>
-  <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
+  <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="transactionModalLabel">Transaction Details</h5>
+          <h5 class="modal-title" id="transactionModalLabel">내역 상세</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -24,7 +25,8 @@
           </div>
           <div class="mb-3">
             <label for="transactionCategory" class="form-label">Category</label><br>
-            <select id="transactionCategory" v-model="selectedCategory" class="form-select" @change="handleCategoryChange">
+            <select id="transactionCategory" v-model="selectedCategory" class="form-select"
+              @change="handleCategoryChange">
               <option disabled value="">Select a category</option>
               <option v-for="category in categories" :key="category" :value="category">
                 {{ category }}
@@ -93,7 +95,7 @@ export default defineComponent({
     }
 
     const saveChanges = () => {
-          //옵션에서 선택 된게 추가일 경우
+      //옵션에서 선택 된게 추가일 경우
       if (selectedCategory.value === 'add-new') {
         editableTransaction.value.category = newCategory.value
       }
