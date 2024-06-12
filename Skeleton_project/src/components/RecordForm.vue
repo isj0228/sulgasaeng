@@ -10,8 +10,8 @@
             </div>
             <div class="form-group">
                 <p for="transactionType" class="form-label">Type</p>
-                <input v-model="newTransaction.type" id="transactionType" type="radio" name="type" value="income" required> 입금
-                <input v-model="newTransaction.type" id="transactionType" type="radio" name="type" value="outcome" class="ms-3" required> 출금
+                <input v-model="newTransaction.type" id="transactionType" type="radio" name="type" value="입금" required> 입금
+                <input v-model="newTransaction.type" id="transactionType" type="radio" name="type" value="출금" class="ms-3" required> 출금
             </div>
             <div class="form-group">
                 <label for="transactionAmount" class="form-label">Amount</label>
@@ -53,7 +53,7 @@ const loading = ref(true)
 const categories = computed(() => budgetStore.categories)
 const newTransaction = ref({
     date: '',
-    type: 'income',
+    type: '입금',
     amount: '',
     category: '',
     desc: ''
