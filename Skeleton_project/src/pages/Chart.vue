@@ -38,6 +38,7 @@
 
 <script>
 import Chart from 'chart.js/auto';
+import { useBudgetStore } from '@/stores/budgetStore';
 
 export default {
   data() {
@@ -58,21 +59,23 @@ export default {
     clearInterval(this.intervalId); // Clear the polling interval when component is destroyed
   },
   methods: {
-    fetchData() {
-      fetch('../db-server/db.json')
-        .then(response => response.json())
-        .then(data => {
-          const outcomeData = data['budget-list'].filter(item => item.type === 'outcome');
-          const categories = outcomeData.map(item => item.category);
-          const amounts = outcomeData.map(item => parseFloat(item.amount));
-          this.chartData = { categories, amounts };
-          this.totalAmount = amounts.reduce((acc, curr) => acc + curr, 0);
-          this.updatePieChart();
-          this.updateBarChart(data);
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
+    async fetchData() {
+      const budgetStore = useBudgetStore();
+      try{
+        await budgetStore.getTransactions();
+        const outcomeData = budgetStore.transactions.filter(item => item.type === 'outcome');
+        const categories = outcomeData.map(item => item.category);
+        const amounts = outcomeData.map(item => parseFloat(item.amount));
+        this.chartData = { categories, amounts };
+        this.totalAmount = amounts.reduce((acc, curr) => acc + curr, 0);
+        this.updatePieChart();
+        this.updateBarChart(budgetStore.transactions);
+
+      }catch(err){
+        console.error('Error fetching data:', error);
+      }finally {
+        this.loading = false; // 로딩 상태 업데이트
+      }
     },
     getCurrentMonth() {
       const date = new Date();
@@ -123,8 +126,8 @@ export default {
       if (this.myBarChart) {
         this.myBarChart.destroy();
       }
-      const incomeData = data['budget-list'].filter(item => item.type === 'income');
-      const outcomeData = data['budget-list'].filter(item => item.type === 'outcome');
+      const incomeData = data.filter(item => item.type === 'income');
+      const outcomeData = data.filter(item => item.type === 'outcome');
       const weeklyIncome = [0, 0, 0, 0]; // Initialize array for 4 weeks
       const weeklyOutcome = [0, 0, 0, 0]; // Initialize array for 4 weeks
       const weekLabels = ["Week 1", "Week 2", "Week 3", "Week 4"];
@@ -190,7 +193,7 @@ export default {
                 max: Math.max(...weeklyIncome.concat(weeklyOutcome)) * 1.2, // Adjust the max value based on data
                 maxTicksLimit: 5,
                 padding: 10,
-                callback: function(value, index, values) {
+                callback: function (value, index, values) {
                   return value.toLocaleString();
                 }
               },
@@ -231,12 +234,14 @@ export default {
 .chart-bar {
   position: relative;
 }
+
 #barChartTotals div {
   display: inline-block;
   width: 25%;
   text-align: center;
   margin-top: 10px;
 }
+
 #monthLabel {
   font-weight: bold;
   font-size: 1.2em;
