@@ -66,8 +66,8 @@
           <div class="col-md-3">
             <input v-model="newTransaction.desc" class="form-control" placeholder="Description" required />
           </div>
-          <div class="col-md-12">
-            <button type="submit" class="btn btn-success">내역 추가</button>
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-success w-100">추가</button>
           </div>
         </form>
       </div>
