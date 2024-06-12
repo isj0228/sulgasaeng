@@ -25,7 +25,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="transaction in sortedTransactions" :key="transaction.id" @click="selectTransaction(transaction)">
+            <tr v-for="transaction in paginatedTransactions" :key="transaction.id" @click="selectTransaction(transaction)">
               <td>{{ transaction.date }}</td>
               <td :class="transaction.type === '입금' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
               <td>{{ transaction.amount }}</td>
@@ -120,11 +120,11 @@
       const paginatedTransactions = computed(() => {
         const start = (currentPage.value - 1) * itemsPerPage
         const end = start + itemsPerPage
-        return budgetStore.filteredTransactions.slice(start, end)
+        return sortedTransactions.value.slice(start, end)
       })
-    
+
       const sortedTransactions = computed(() => {
-        let sorted = [...paginatedTransactions.value]
+        let sorted = [...budgetStore.filteredTransactions]
         if (sortKey.value) {
           sorted.sort((a, b) => {
             let result = 0
