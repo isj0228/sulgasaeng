@@ -14,8 +14,10 @@
             </tr>
           </thead>
           <tbody>
+            <!-- 각 row는 클릭 시 해당하는 내역의 모달창이 열린다. -->
             <tr v-for="transaction in paginatedTransactions" :key="transaction.id" @click="selectTransaction(transaction)">
               <td>{{ transaction.date }}</td>
+              <!-- income 초록색 outcome 빨간색으로 표시한다. -->
               <td :class="transaction.type === 'income' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
               <td>{{ transaction.amount }}</td>
               <td>{{ transaction.category }}</td>
@@ -23,11 +25,17 @@
             </tr>
           </tbody>
         </table>
+        <!-- 테이블의 page를 구현하는 파트-->
+        <!-- div를 flex로 만들고 justify-content-between 간격 비슷하게 -->
         <div class="d-flex justify-content-between mb-3">
+            <!-- 이전 페이지 버튼 현재페이지가 1일경우 버튼 비활성화 -->
           <button class="btn btn-primary" @click="prevPage" :disabled="currentPage === 1">Previous</button>
           <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <!-- 다음 페이지 버튼 현재페이지가 전체페이지와 같을경우 즉 마지막페이지일경우 버튼 비활성화 -->
           <button class="btn btn-primary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
         </div>
+
+        <!-- 새로운 내역을 추가하는 파트 -->
         <form @submit.prevent="addNewTransaction" class="row g-3">
           <div class="col-md-2">
             <input v-model="newTransaction.date" type="date" class="form-control" placeholder="Date" required />
@@ -131,6 +139,9 @@
   
       const selectTransaction = (transaction) => {
         selectedTransaction.value = { ...transaction } // Deep copy to avoid direct mutation
+        //모달의 최상위 div의 id가 transactionModal 이므로 DOM에 html 요소에서 해당아이디를 찾아 아래와 같은 반환값이 나온다
+        //<div id="transactionModal" class="modal">...</div>
+        //이미 초기화된 모달 인스턴스가 존재하는지 확인하고 새롭게 만들어 반환합니다.
         const modal = new bootstrap.Modal(document.getElementById('transactionModal'))
         modal.show()
       }
