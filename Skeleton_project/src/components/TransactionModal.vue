@@ -39,7 +39,7 @@
           </div>
           <div class="mb-3">
             <label for="transactionDesc" class="form-label">Description</label>
-            <input id="transactionDesc" v-model="editableTransaction.desc" class="form-control">
+            <textarea v-model="editableTransaction.desc" class="form-control" id="transactionDesc" rows="3"></textarea>
           </div>
         </div>
         <div class="modal-footer">
