@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="col-auto">
-          <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+          <i class="fa-regular fa-credit-card fa-2x text-gray-300"></i>
         </div>
       </div>
       <button v-show="showButton" class="btn btn-primary btn-sm position-absolute top-0 end-0 mt-2 me-2"
