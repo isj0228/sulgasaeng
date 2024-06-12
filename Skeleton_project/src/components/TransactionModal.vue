@@ -123,5 +123,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* 스타일은 필요에 따라 추가하세요 */
 </style>
