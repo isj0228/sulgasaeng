@@ -5,6 +5,9 @@
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">입금별 소비</h6>
         </div>
+        <div class="month-label">
+          <h6 class="m-0 font-weight-bold text-secondary">{{ currentMonth }}</h6>
+        </div>
         <div class="card-body">
           <div class="row">
             <div class="col-lg-8">
@@ -24,6 +27,9 @@
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">출금별 소비</h6>
+        </div>
+        <div class="month-label">
+          <h6 class="m-0 font-weight-bold text-secondary">{{ currentMonth }}</h6>
         </div>
         <div class="card-body">
           <div class="row">
@@ -49,6 +55,7 @@
   export default {
     data() {
       return {
+        currentMonth: this.getCurrentMonth(),
         depositChartData: [],
         withdrawalChartData: [],
         totalDepositAmount: 0,
@@ -78,6 +85,11 @@
         } catch (err) {
           console.error('Error fetching data:', err);
         }
+      },
+      getCurrentMonth() {
+        const date = new Date();
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return monthNames[date.getMonth()];
       },
       processChartData(data) {
         const categories = data.map(item => item.category);
@@ -142,3 +154,10 @@
   }
   </script>
   
+  <style>
+.month-label {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+</style>
