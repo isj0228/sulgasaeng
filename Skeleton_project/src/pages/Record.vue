@@ -18,7 +18,7 @@
             <tr v-for="transaction in paginatedTransactions" :key="transaction.id" @click="selectTransaction(transaction)">
               <td>{{ transaction.date }}</td>
               <!-- income 초록색 outcome 빨간색으로 표시한다. -->
-              <td :class="transaction.type === 'income' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
+              <td :class="transaction.type === '입금' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
               <td>{{ transaction.amount }}</td>
               <td>{{ transaction.category }}</td>
               <td>{{ transaction.desc }}</td>
@@ -41,8 +41,8 @@
           </div>
           <div class="col-md-2">
             <select v-model="newTransaction.type" class="form-select col" required>
-              <option value="income">Income</option>
-              <option value="outcome">Outcome</option>
+              <option value="입금">입금</option>
+              <option value="출금">출금</option>
             </select>
           </div>
           <div class="col-md-2">
@@ -65,9 +65,14 @@
           <div class="col-md-3">
             <input v-model="newTransaction.desc" class="form-control" placeholder="Description" required />
           </div>
-          <div class="col-md-1">
-            <button type="submit" class="btn btn-success w-100">추가</button>
-          </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">추가하기</span>
+                </button>
+            </div>
         </form>
       </div>
   
@@ -93,7 +98,7 @@
       const selectedTransaction = ref({})
       const newTransaction = ref({
         date: '',
-        type: 'income',
+        type: '입금',
         amount: '',
         category: '',
         desc: ''
@@ -121,7 +126,7 @@
           newTransaction.value.category = selectedCategory.value
         }
         await budgetStore.addTransaction(newTransaction.value)
-        newTransaction.value = { date: '', type: 'income', amount: '', category: '', desc: '' }
+        newTransaction.value = { date: '', type: '입금', amount: '', category: '', desc: '' }
         selectedCategory.value = ''
         newCategory.value = ''
       }
@@ -171,7 +176,7 @@
       }
   
       const currentCategories = computed(() => {
-        return newTransaction.value.type === 'income' ? incomeCategories.value : outcomeCategories.value
+        return newTransaction.value.type === '입금' ? incomeCategories.value : outcomeCategories.value
       })
   
       onMounted(async () => {
