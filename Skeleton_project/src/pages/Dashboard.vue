@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import Record from "@/pages/Record1.vue" // Record1.vue를 불러옵니다
+import Record from "@/pages/Card_Record.vue" // Record1.vue를 불러옵니다
 import Card1 from "@/components/Card1.vue"
 import Card2 from "@/components/Card2.vue"
 import RecordForm from "@/components/RecordForm.vue"
