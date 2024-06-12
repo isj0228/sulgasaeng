@@ -1,17 +1,17 @@
 <template>
   <div>
-    <PieChart />
+    <PieCombined />
     <BarChart />
   </div>
 </template>
 
 <script>
-import PieChart from '@/components/chart/PieChart.vue';
+import PieCombined from '@/components/chart/PieCombined.vue';
 import BarChart from '@/components/chart/BarChart.vue';
 
 export default {
   components: {
-    PieChart,
+    PieCombined,
     BarChart
   }
 }
