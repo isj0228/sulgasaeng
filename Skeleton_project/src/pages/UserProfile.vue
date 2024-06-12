@@ -50,7 +50,7 @@ import { useUserStore } from '@/stores/userStore.js'
 const userInfo = computed(() => useUserStore().userInfo);
 const { updateUser } = useUserStore();
 // 상태 정의
-const defaultImg = "/img/default.png";
+const defaultImg = userInfo.value.image;
 const imageInput = ref(defaultImg);
 const fileInput = ref(null);
 const nameInput = ref(null);
