@@ -1,18 +1,18 @@
 {
   "user": [
     {
-      "id": "1",
       "name": "park",
       "email": "a@a.com",
       "phone": "010",
-      "image": ""
+      "image": "/img/image1.png",
+      "id": "1"
     }
   ],
   "budget-list": [
     {
       "id": "2",
       "date": "2024-06-02",
-      "type": "outcome",
+      "type": "출금",
       "amount": "150",
       "category": "교통비",
       "desc": "버스 요금"
@@ -20,7 +20,7 @@
     {
       "id": "3",
       "date": "2024-06-03",
-      "type": "income",
+      "type": "입금",
       "amount": 20022,
       "category": "불로소득",
       "desc": "배당금"
@@ -28,7 +28,7 @@
     {
       "id": "4",
       "date": "2024-06-04",
-      "type": "outcome",
+      "type": "출금",
       "amount": 5011,
       "category": "식비",
       "desc": "아침 식사"
@@ -36,7 +36,7 @@
     {
       "id": "5",
       "date": "2024-06-05",
-      "type": "outcome",
+      "type": "출금",
       "amount": "500",
       "category": "주거비",
       "desc": "월세"
@@ -44,7 +44,7 @@
     {
       "id": "6",
       "date": "2024-06-06",
-      "type": "income",
+      "type": "입금",
       "amount": "100",
       "category": "기타",
       "desc": "프리랜서 일"
@@ -52,7 +52,7 @@
     {
       "id": "7",
       "date": "2024-06-07",
-      "type": "outcome",
+      "type": "출금",
       "amount": "200",
       "category": "오락/취미",
       "desc": "영화 관람"
@@ -60,7 +60,7 @@
     {
       "id": "8",
       "date": "2024-06-08",
-      "type": "income",
+      "type": "입금",
       "amount": "50",
       "category": "기타",
       "desc": "용돈"
@@ -68,7 +68,7 @@
     {
       "id": "9",
       "date": "2024-06-09",
-      "type": "income",
+      "type": "입금",
       "amount": "100",
       "category": "불로소득",
       "desc": "배당금"
@@ -76,7 +76,7 @@
     {
       "id": "10",
       "date": "2024-06-10",
-      "type": "outcome",
+      "type": "출금",
       "amount": "80",
       "category": "기타",
       "desc": "커피 구매"
@@ -84,26 +84,12 @@
     {
       "id": "7ebc",
       "date": "2024-06-19",
-      "type": "income",
+      "type": "입금",
       "amount": 10999,
       "category": "근로소득",
       "desc": "월급"
     },
     {
-      "id": "9817",
-      "date": "2024-06-13",
-      "type": "outcome",
-      "amount": 10000,
-      "category": "식비",
-      "desc": "짜장면"
-    },
-    {
-      "id": "6cc9",
-      "date": "2024-06-26",
-      "type": "outcome",
-      "amount": 10000,
-      "category": "식비",
-      "desc": "버억"
     }
   ]
 }
