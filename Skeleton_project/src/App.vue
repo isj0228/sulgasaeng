@@ -1,10 +1,10 @@
 <template>
   <div id="wrapper">
-    <Sidebar />
+    <!-- <Sidebar /> -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <Topbar />
-        <div class="container-fluid">
+        <div class="container-fluid px-5">
           <router-view/>
         </div>
       </div>
