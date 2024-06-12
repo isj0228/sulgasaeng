@@ -25,13 +25,12 @@
             </tr>
           </tbody>
         </table>
-        <!-- 테이블의 page를 구현하는 파트-->
-        <!-- div를 flex로 만들고 justify-content-between 간격 비슷하게 -->
+        <!-- 테이블의 페이지를 구현하는 파트 -->
         <div class="d-flex justify-content-between mb-3">
-          <!-- 이전 페이지 버튼 현재페이지가 1일경우 버튼 비활성화 -->
+          <!-- 이전 페이지 버튼 현재 페이지가 1일 경우 버튼 비활성화 -->
           <button class="btn btn-primary" @click="prevPage" :disabled="currentPage === 1">Previous</button>
           <span>Page {{ currentPage }} of {{ totalPages }}</span>
-          <!-- 다음 페이지 버튼 현재페이지가 전체페이지와 같을경우 즉 마지막페이지일경우 버튼 비활성화 -->
+          <!-- 다음 페이지 버튼 현재 페이지가 전체 페이지와 같을 경우 버튼 비활성화 -->
           <button class="btn btn-primary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
         </div>
   
@@ -53,7 +52,7 @@
           <div class="col-md-2">
             <select v-model="selectedCategory" class="form-select col" id="category" required @change="handleCategoryChange">
               <option disabled value="">Select a category</option>
-              <option v-for="category in categories" :key="category" :value="category">
+              <option v-for="category in currentCategories" :key="category" :value="category">
                 {{ category }}
               </option>
               <option value="add-new">추가..</option>
@@ -73,7 +72,7 @@
       </div>
   
       <!-- 모달 컴포넌트 사용 -->
-      <TransactionModal :transaction="selectedTransaction" :categories="categories" @delete-transaction="deleteTransactionFromModal" @update-transaction="updateTransaction" />
+      <TransactionModal :transaction="selectedTransaction" :incomeCategories="incomeCategories" :outcomeCategories="outcomeCategories" @delete-transaction="deleteTransactionFromModal" @update-transaction="updateTransaction" />
     </div>
   </template>
   
@@ -92,8 +91,6 @@
       const currentPage = ref(1)
       const itemsPerPage = 10
       const selectedTransaction = ref({})
-      //카테고리가 변경되면 바로 반응하게 computed를 사용
-      const categories = computed(() => budgetStore.categories)
       const newTransaction = ref({
         date: '',
         type: 'income',
@@ -103,6 +100,9 @@
       })
       const selectedCategory = ref('')
       const newCategory = ref('')
+  
+      const incomeCategories = computed(() => budgetStore.incomeCategories)
+      const outcomeCategories = computed(() => budgetStore.outcomeCategories)
   
       const totalPages = computed(() => {
         return Math.ceil(budgetStore.transactions.length / itemsPerPage)
@@ -170,6 +170,10 @@
         }
       }
   
+      const currentCategories = computed(() => {
+        return newTransaction.value.type === 'income' ? incomeCategories.value : outcomeCategories.value
+      })
+  
       onMounted(async () => {
         try {
           await budgetStore.getTransactions()
@@ -194,8 +198,10 @@
         selectTransaction,
         deleteTransactionFromModal,
         updateTransaction,
-        categories,
-        handleCategoryChange
+        incomeCategories,
+        outcomeCategories,
+        handleCategoryChange,
+        currentCategories
       }
     }
   })
