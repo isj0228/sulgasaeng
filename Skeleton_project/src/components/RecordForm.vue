@@ -12,14 +12,14 @@
                 <p for="transactionType" class="form-label">분류</p>
                 <div class="form-check form-check-inline">
                     <input v-model="newTransaction.type" class="form-check-input" type="radio" name="transactionHistory" id="exampleRadios1"
-                        value="option1" checked>
+                        value="입금" checked>
                     <label class="form-check-label" for="exampleRadios1">
                         입금
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input v-model="newTransaction.type" class="form-check-input" type="radio" name="transactionHistory" id="exampleRadios2"
-                        value="option2">
+                        value="출금">
                     <label class="form-check-label" for="exampleRadios2">
                         출금
                     </label>
@@ -27,13 +27,13 @@
             </div>
             <div class="form-group">
                 <label for="transactionAmount" class="form-label">금액</label>
-                <input id="transactionAmount" v-model="newTransaction.amount" type="number" class="form-control"
+                <input id="transactionAmount" v-model="newTransaction.amount" min="0" type="number" class="form-control"
                     placeholder="금액을 입력하세요." required>
             </div>
             <div class="form-group">
                 <label for="transactionCategory" class="form-label">카테고리</label>
                 <select id="transactionCategory" v-model="selectedCategory" class="form-select"
-                    @change="handleCategoryChange">
+                    @change="handleCategoryChange" required>
                     <option disabled value="">Select a category</option>
                     <option v-for="category in currentCategories" :key="category" :value="category">
                         {{ category }}
