@@ -28,13 +28,13 @@
         <!-- 테이블의 page를 구현하는 파트-->
         <!-- div를 flex로 만들고 justify-content-between 간격 비슷하게 -->
         <div class="d-flex justify-content-between mb-3">
-            <!-- 이전 페이지 버튼 현재페이지가 1일경우 버튼 비활성화 -->
+          <!-- 이전 페이지 버튼 현재페이지가 1일경우 버튼 비활성화 -->
           <button class="btn btn-primary" @click="prevPage" :disabled="currentPage === 1">Previous</button>
           <span>Page {{ currentPage }} of {{ totalPages }}</span>
-        <!-- 다음 페이지 버튼 현재페이지가 전체페이지와 같을경우 즉 마지막페이지일경우 버튼 비활성화 -->
+          <!-- 다음 페이지 버튼 현재페이지가 전체페이지와 같을경우 즉 마지막페이지일경우 버튼 비활성화 -->
           <button class="btn btn-primary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
         </div>
-
+  
         <!-- 새로운 내역을 추가하는 파트 -->
         <form @submit.prevent="addNewTransaction" class="row g-3">
           <div class="col-md-2">
@@ -49,9 +49,20 @@
           <div class="col-md-2">
             <input v-model="newTransaction.amount" type="number" class="form-control" placeholder="Amount" required />
           </div>
-          <div class="col-md-3">
-            <input v-model="newTransaction.category" class="form-control" placeholder="Category" required />
+  
+          <div class="col-md-2">
+            <select v-model="selectedCategory" class="form-select col" id="category" required @change="handleCategoryChange">
+              <option disabled value="">Select a category</option>
+              <option v-for="category in categories" :key="category" :value="category">
+                {{ category }}
+              </option>
+              <option value="add-new">추가..</option>
+            </select>
+            <div v-if="selectedCategory === 'add-new'" class="form-group mt-2">
+              <input v-model="newCategory" class="form-control" placeholder="Enter new category" required />
+            </div>
           </div>
+  
           <div class="col-md-3">
             <input v-model="newTransaction.desc" class="form-control" placeholder="Description" required />
           </div>
@@ -62,7 +73,7 @@
       </div>
   
       <!-- 모달 컴포넌트 사용 -->
-      <TransactionModal :transaction="selectedTransaction" @delete-transaction="deleteTransactionFromModal" @update-transaction="updateTransaction" />
+      <TransactionModal :transaction="selectedTransaction" :categories="categories" @delete-transaction="deleteTransactionFromModal" @update-transaction="updateTransaction" />
     </div>
   </template>
   
@@ -81,7 +92,8 @@
       const currentPage = ref(1)
       const itemsPerPage = 10
       const selectedTransaction = ref({})
-  
+      //카테고리가 변경되면 바로 반응하게 computed를 사용
+      const categories = computed(() => budgetStore.categories)
       const newTransaction = ref({
         date: '',
         type: 'income',
@@ -89,6 +101,8 @@
         category: '',
         desc: ''
       })
+      const selectedCategory = ref('')
+      const newCategory = ref('')
   
       const totalPages = computed(() => {
         return Math.ceil(budgetStore.transactions.length / itemsPerPage)
@@ -101,8 +115,15 @@
       })
   
       const addNewTransaction = async () => {
+        if (selectedCategory.value === 'add-new') {
+          newTransaction.value.category = newCategory.value
+        } else {
+          newTransaction.value.category = selectedCategory.value
+        }
         await budgetStore.addTransaction(newTransaction.value)
         newTransaction.value = { date: '', type: 'income', amount: '', category: '', desc: '' }
+        selectedCategory.value = ''
+        newCategory.value = ''
       }
   
       const deleteTransaction = async (id) => {
@@ -139,11 +160,14 @@
   
       const selectTransaction = (transaction) => {
         selectedTransaction.value = { ...transaction } // Deep copy to avoid direct mutation
-        //모달의 최상위 div의 id가 transactionModal 이므로 DOM에 html 요소에서 해당아이디를 찾아 아래와 같은 반환값이 나온다
-        //<div id="transactionModal" class="modal">...</div>
-        //이미 초기화된 모달 인스턴스가 존재하는지 확인하고 새롭게 만들어 반환합니다.
         const modal = new bootstrap.Modal(document.getElementById('transactionModal'))
         modal.show()
+      }
+  
+      const handleCategoryChange = () => {
+        if (selectedCategory.value !== 'add-new') {
+          newTransaction.value.category = selectedCategory.value
+        }
       }
   
       onMounted(async () => {
@@ -162,12 +186,16 @@
         prevPage,
         nextPage,
         newTransaction,
+        selectedCategory,
+        newCategory,
         addNewTransaction,
         deleteTransaction,
         selectedTransaction,
         selectTransaction,
         deleteTransactionFromModal,
-        updateTransaction
+        updateTransaction,
+        categories,
+        handleCategoryChange
       }
     }
   })

@@ -23,8 +23,17 @@
             <input id="transactionAmount" v-model="editableTransaction.amount" type="number" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="transactionCategory" class="form-label">Category</label>
-            <input id="transactionCategory" v-model="editableTransaction.category" class="form-control">
+            <label for="transactionCategory" class="form-label">Category</label><br>
+            <select id="transactionCategory" v-model="selectedCategory" class="form-select" @change="handleCategoryChange">
+              <option disabled value="">Select a category</option>
+              <option v-for="category in categories" :key="category" :value="category">
+                {{ category }}
+              </option>
+              <option value="add-new">추가..</option>
+            </select>
+            <div v-if="selectedCategory === 'add-new'" class="form-group mt-2">
+              <input v-model="newCategory" class="form-control" placeholder="Enter new category" required />
+            </div>
           </div>
           <div class="mb-3">
             <label for="transactionDesc" class="form-label">Description</label>
@@ -45,22 +54,37 @@
 import { defineComponent, ref, watch, toRefs } from 'vue'
 import { Modal } from 'bootstrap'
 
+//props로 클릭된 거래내역과 카테고리 배열을 받아온다.
+//변경 시 'delete-transaction', 'update-transaction' 두 이벤트를 발생시켜 부모에게 전달
 export default defineComponent({
   name: 'TransactionModal',
   props: {
     transaction: {
       type: Object,
       required: true
+    },
+    categories: {
+      type: Array,
+      required: true
     }
   },
   emits: ['delete-transaction', 'update-transaction'],
   setup(props, { emit }) {
-    const { transaction } = toRefs(props)
+    const { transaction, categories } = toRefs(props)
     const editableTransaction = ref({ ...transaction.value })
-
+    const selectedCategory = ref(editableTransaction.value.category || '')
+    const newCategory = ref('')
+    console.log(categories);
     watch(transaction, (newTransaction) => {
       editableTransaction.value = { ...newTransaction }
+      selectedCategory.value = newTransaction.category
     })
+    //옵션에서 선택 된게 추가가 아닐 경우
+    const handleCategoryChange = () => {
+      if (selectedCategory.value !== 'add-new') {
+        editableTransaction.value.category = selectedCategory.value
+      }
+    }
 
     const deleteTransaction = () => {
       emit('delete-transaction', transaction.value.id)
@@ -69,6 +93,10 @@ export default defineComponent({
     }
 
     const saveChanges = () => {
+          //옵션에서 선택 된게 추가일 경우
+      if (selectedCategory.value === 'add-new') {
+        editableTransaction.value.category = newCategory.value
+      }
       emit('update-transaction', { id: transaction.value.id, ...editableTransaction.value })
       const modal = Modal.getInstance(document.getElementById('transactionModal'))
       modal.hide()
@@ -76,8 +104,12 @@ export default defineComponent({
 
     return {
       editableTransaction,
+      selectedCategory,
+      newCategory,
       deleteTransaction,
-      saveChanges
+      saveChanges,
+      handleCategoryChange,
+      categories
     }
   }
 })
