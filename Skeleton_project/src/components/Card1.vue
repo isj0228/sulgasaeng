@@ -5,7 +5,9 @@
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Earnings (Monthly)</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                        <div v-if="isLoading" class="h5 mb-0 font-weight-bold text-gray-800">Loading...</div>
+                        <div v-else class="h5 mb-0 font-weight-bold text-gray-800">{{ totalOutput }}</div>
+                    
                 </div>
                 <div class="col-auto">
                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -15,10 +17,25 @@
     </div>
 </template>
 
-<script>
-export default {
+<script setup>
+import { ref, watch, watchEffect, computed } from 'vue';
+import { monthlyOutput} from '../service/monthlySummary';
+import { useBudgetStore } from '@/stores/budgetStore.js';
+const budgetStore = useBudgetStore();
+const totalOutput = ref(0);
+const isLoading = ref(true);
 
-}
+
+
+const updateTotalOutput = () => {
+  totalOutput.value = monthlyOutput();
+  isLoading.value = false;
+};
+
+watch(() => budgetStore.transactions, () => {
+  updateTotalOutput();
+});
+
+updateTotalOutput();
 </script>
 
-<!-- <style lang="scss" scoped></style> -->
