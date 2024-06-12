@@ -4,6 +4,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
       </div>
       <div class="card-body">
+        <div id="monthLabel" class="text-center mb-4">{{ currentMonth }}</div>
         <div class="chart-bar">
           <canvas id="myBarChart"></canvas>
         </div>
@@ -20,6 +21,7 @@
     data() {
       return {
         myBarChart: null,
+        currentMonth: this.getCurrentMonth()
       };
     },
     mounted() {
@@ -34,6 +36,11 @@
         } catch (err) {
           console.error('Error fetching data:', err);
         }
+      },
+      getCurrentMonth() {
+        const date = new Date();
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return monthNames[date.getMonth()];
       },
       updateBarChart(data) {
         if (this.myBarChart) {
@@ -151,4 +158,10 @@
     text-align: center;
     margin-top: 10px;
   }
+  
+  #monthLabel {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
   </style>
+  
