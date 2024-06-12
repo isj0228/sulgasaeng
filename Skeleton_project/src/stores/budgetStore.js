@@ -14,6 +14,7 @@ export const useBudgetStore = defineStore('budgetStore', {
   actions: {
     async getTransactions() {
       try {
+        console.log("호출!!")
         const response = await axios.get(API_URL);
         this.transactions = response.data;
         this.filteredTransactions = [...this.transactions]; // 초기값 설정

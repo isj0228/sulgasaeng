@@ -11,10 +11,10 @@
 
   <div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
-      <Card1 />
+      <IncomeCard />
     </div>
     <div class="col-xl-3 col-md-6 mb-4">
-      <Card1 />
+      <OutcomeCard />
     </div>
     <div class="col-xl-3 col-md-6 mb-4">
       <Card2 />
@@ -55,11 +55,12 @@
 </template>
 
 <script setup>
-import Record from '@/pages/Card_Record.vue' // Record1.vue를 불러옵니다
-import Card1 from '@/components/Card1.vue'
-import Card2 from '@/components/Card2.vue'
-import Card4 from '@/components/Card4.vue'
-import RecordForm from '@/components/RecordForm.vue'
+import Record from "@/pages/Card_Record.vue" // Record1.vue를 불러옵니다
+import Card2 from "@/components/Card2.vue"
+import RecordForm from "@/components/RecordForm.vue"
+import IncomeCard from "../components/IncomeCard.vue";
+import OutcomeCard from "../components/OutcomeCard.vue"
+
 </script>
 
 <style lang="scss" scoped></style>
