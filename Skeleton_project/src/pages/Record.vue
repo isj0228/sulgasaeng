@@ -7,7 +7,7 @@
         <div class="mb-3">
           <select v-model="selectedCategory" @change="filterByCategory" class="form-select">
             <option value="">All Categories</option>
-            <option v-for="category in currentCategories" :key="category" :value="category">
+            <option v-for="category in Categories" :key="category" :value="category">
               {{ category }}
             </option>
           </select>
