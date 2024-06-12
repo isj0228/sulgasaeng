@@ -112,6 +112,22 @@
       "amount": 555,
       "category": "불로소득",
       "desc": "555"
+    },
+    {
+      "id": "b3b9",
+      "date": "2024-06-28",
+      "type": "출금",
+      "amount": 1231,
+      "category": "gg",
+      "desc": "ggg"
+    },
+    {
+      "id": "4ae8",
+      "date": "2024-06-20",
+      "type": "출금",
+      "amount": 10000,
+      "category": "교통비",
+      "desc": "하이"
     }
   ]
 }
