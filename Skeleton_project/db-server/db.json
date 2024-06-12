@@ -1,11 +1,11 @@
 {
   "user": [
     {
-      "id": "1",
       "name": "park",
       "email": "a@a.com",
       "phone": "010",
-      "image": ""
+      "image": "/img/image1.png",
+      "id": "1"
     }
   ],
   "budget-list": [
@@ -88,6 +88,14 @@
       "amount": 10999,
       "category": "근로소득",
       "desc": "월급"
+    },
+    {
+      "id": "2e88",
+      "date": "2024-06-19",
+      "type": "입금",
+      "amount": 10000,
+      "category": "식비",
+      "desc": "돈가스"
     }
   ]
 }
