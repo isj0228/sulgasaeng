@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import PieChart from '@/components/PieChart.vue';
-import BarChart from '@/components/BarChart.vue';
+import PieChart from '@/components/chart/PieChart.vue';
+import BarChart from '@/components/chart/BarChart.vue';
 
 export default {
   components: {
