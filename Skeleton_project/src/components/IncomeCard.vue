@@ -3,11 +3,10 @@
         <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Earnings (Monthly)</div>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ month }}월 소득
+                        </div>
                         <div v-if="isLoading" class="h5 mb-0 font-weight-bold text-gray-800">Loading...</div>
-                        <div v-else class="h5 mb-0 font-weight-bold text-gray-800">{{ totalOutput }}</div>
-                    
+                        <div v-else class="h5 mb-0 font-weight-bold text-gray-800">{{ totalInput }}</div>
                 </div>
                 <div class="col-auto">
                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -19,23 +18,24 @@
 
 <script setup>
 import { ref, watch, watchEffect, computed } from 'vue';
-import { monthlyOutput} from '../service/monthlySummary';
+import { monthlyInput} from '../service/monthlySummary';
 import { useBudgetStore } from '@/stores/budgetStore.js';
+
 const budgetStore = useBudgetStore();
-const totalOutput = ref(0);
+const totalInput = ref(0);
 const isLoading = ref(true);
 
+const month = Number((new Date()).getMonth()) + 1;
 
-
-const updateTotalOutput = () => {
-  totalOutput.value = monthlyOutput();
+const updateTotalInput = () => {
+  totalInput.value = monthlyInput();
   isLoading.value = false;
 };
 
 watch(() => budgetStore.transactions, () => {
-  updateTotalOutput();
-});
+  updateTotalInput();
+}, {deep:true});
 
-updateTotalOutput();
+updateTotalInput();
 </script>
 

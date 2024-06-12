@@ -88,46 +88,6 @@
       "amount": 10999,
       "category": "근로소득",
       "desc": "월급"
-    },
-    {
-      "id": "d3e3",
-      "date": "2024-06-13",
-      "type": "입금",
-      "amount": 1122,
-      "category": "감자",
-      "desc": "ㄷㄷㄷㄷ"
-    },
-    {
-      "id": "bea8",
-      "date": "2024-06-15",
-      "type": "출금",
-      "amount": 22222,
-      "category": "고구마",
-      "desc": "ㄷㄷㄷㄷㄷ"
-    },
-    {
-      "id": "4611",
-      "date": "2024-05-29",
-      "type": "입금",
-      "amount": 555,
-      "category": "불로소득",
-      "desc": "555"
-    },
-    {
-      "id": "b3b9",
-      "date": "2024-06-28",
-      "type": "출금",
-      "amount": 1231,
-      "category": "gg",
-      "desc": "ggg"
-    },
-    {
-      "id": "4ae8",
-      "date": "2024-06-20",
-      "type": "출금",
-      "amount": 10000,
-      "category": "교통비",
-      "desc": "하이"
     }
   ]
 }
