@@ -14,8 +14,8 @@
           <div class="mb-3">
             <label for="transactionType" class="form-label">Type</label>
             <select id="transactionType" v-model="editableTransaction.type" class="form-select">
-              <option value="income">Income</option>
-              <option value="outcome">Outcome</option>
+              <option value="입금">입금</option>
+              <option value="출금">출금</option>
             </select>
           </div>
           <div class="mb-3">
@@ -78,7 +78,7 @@ export default defineComponent({
     const newCategory = ref('')
 
     const currentCategories = computed(() => {
-      return editableTransaction.value.type === 'income' ? incomeCategories.value : outcomeCategories.value
+      return editableTransaction.value.type === '입금' ? incomeCategories.value : outcomeCategories.value
     })
 
     watch(transaction, (newTransaction) => {
