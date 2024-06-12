@@ -63,7 +63,7 @@ export default {
       const budgetStore = useBudgetStore();
       try{
         await budgetStore.getTransactions();
-        const outcomeData = budgetStore.transactions.filter(item => item.type === 'outcome');
+        const outcomeData = budgetStore.transactions.filter(item => item.type === '출금');
         const categories = outcomeData.map(item => item.category);
         const amounts = outcomeData.map(item => parseFloat(item.amount));
         this.chartData = { categories, amounts };
@@ -127,7 +127,7 @@ export default {
         this.myBarChart.destroy();
       }
       const incomeData = data.filter(item => item.type === 'income');
-      const outcomeData = data.filter(item => item.type === 'outcome');
+      const outcomeData = data.filter(item => item.type === '출금');
       const weeklyIncome = [0, 0, 0, 0]; // Initialize array for 4 weeks
       const weeklyOutcome = [0, 0, 0, 0]; // Initialize array for 4 weeks
       const weekLabels = ["Week 1", "Week 2", "Week 3", "Week 4"];
