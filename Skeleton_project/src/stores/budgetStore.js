@@ -11,6 +11,8 @@ export const useBudgetStore = defineStore('budgetStore', {
     transactions: [], // 모든 거래 내역을 배열로 받아 저장
     incomeCategories: [], // 수입 카테고리
     outcomeCategories: [], // 지출 카테고리
+    categories: [],//거래 내역의 카테고리를 받아 저장,
+
     filteredTransactions: [] // 필터링된 거래 내역
   }),
   actions: {
@@ -63,10 +65,13 @@ export const useBudgetStore = defineStore('budgetStore', {
     },
     // 거래 내역에서 카테고리를 추출하는 메서드
     extractCategories() {
+      const categoriesSet = new Set(this.transactions.map(transaction => transaction.category));
+      this.categories = Array.from(categoriesSet);
       const incomeSet = new Set(this.transactions.filter(t => t.type === '입금').map(t => t.category));
       const outcomeSet = new Set(this.transactions.filter(t => t.type === '출금').map(t => t.category));
       this.incomeCategories = Array.from(incomeSet);
       this.outcomeCategories = Array.from(outcomeSet);
+
     },
     // 카테고리별 거래 내역을 필터링하는 메서드
     filterByCategory(category) {
