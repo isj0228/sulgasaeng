@@ -83,7 +83,7 @@ const addNewTransaction = async () => {
         newTransaction.value.category = selectedCategory.value
     }
     await budgetStore.addTransaction(newTransaction.value)
-    newTransaction.value = { date: '', type: 'income', amount: '', category: '', desc: '' }
+    newTransaction.value = { date: '', type: '입금', amount: '', category: '', desc: '' }
     selectedCategory.value = ''
     newCategory.value = ''
 }
@@ -95,7 +95,7 @@ const handleCategoryChange = () => {
 }
 
 const currentCategories = computed(() => {
-    return newTransaction.value.type === 'income' ? incomeCategories.value : outcomeCategories.value
+    return newTransaction.value.type === '입금' ? incomeCategories.value : outcomeCategories.value
 })
 
 onMounted(async () => {
