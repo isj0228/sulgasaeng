@@ -66,8 +66,8 @@ export const useBudgetStore = defineStore('budgetStore', {
     },
     // 거래 내역에서 카테고리를 추출하는 메서드
     extractCategories() {
-      const incomeSet = new Set(this.transactions.filter(t => t.type === 'income').map(t => t.category));
-      const outcomeSet = new Set(this.transactions.filter(t => t.type === 'outcome').map(t => t.category));
+      const incomeSet = new Set(this.transactions.filter(t => t.type === '입금').map(t => t.category));
+      const outcomeSet = new Set(this.transactions.filter(t => t.type === '출금').map(t => t.category));
       this.incomeCategories = Array.from(incomeSet);
       this.outcomeCategories = Array.from(outcomeSet);
     }
