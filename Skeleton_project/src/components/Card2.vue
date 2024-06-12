@@ -44,13 +44,13 @@ export default {
       const outcomeExpenses = this.expensesData.filter(expense => expense.type === '출금');
       const totalIncome = incomeExpenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
       const totalOutcome = outcomeExpenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
-      return totalIncome - totalOutcome; // Calculate the difference between income and outcome
+      return parseFloat((totalIncome - totalOutcome).toFixed(1)); // Calculate the difference between income and outcome, with 1 decimal place
     },
     progressWidth() {
-      return `${(this.totalExpenses / this.targetExpenses) * 100}%`;
+      return `${((this.totalExpenses / this.targetExpenses) * 100).toFixed(1)}%`;
     },
     progressValue() {
-      return (this.totalExpenses / this.targetExpenses) * 100;
+      return parseFloat(((this.totalExpenses / this.targetExpenses) * 100).toFixed(1));
     },
   },
   mounted() {
