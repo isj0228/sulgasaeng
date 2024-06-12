@@ -43,6 +43,7 @@
 </template>
 
 <script setup>
+
 import { ref, onMounted, computed } from 'vue'
 import { useBudgetStore } from '@/stores/budgetStore.js'
 

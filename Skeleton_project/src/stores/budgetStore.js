@@ -6,6 +6,7 @@ const API_URL = 'http://localhost:3000/budget-list';
 
 // 스토어 정의 export로 외부에서 사용 가능
 export const useBudgetStore = defineStore('budgetStore', {
+
   state: () => ({
     transactions: [], // 모든 거래 내역을 배열로 받아 저장
     incomeCategories: [], // 수입 카테고리
