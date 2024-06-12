@@ -1,10 +1,10 @@
 <template>
   <div id="wrapper">
-    <Sidebar />
+    <!-- <Sidebar /> -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <Topbar />
-        <div class="container-fluid">
+        <div class="container-fluid px-5">
           <router-view/>
         </div>
       </div>
@@ -13,8 +13,8 @@
 </template>
 
 <script setup>
-import Topbar from '@/components/Topbar.vue'
-import Sidebar from '@/components/Sidebar.vue'
+import Topbar from '@/components/nav/Topbar.vue'
+// import Sidebar from '@/components/nav/Sidebar.vue'
 
 import { useUserStore } from '@/stores/userStore.js'
 const { fetchUser } = useUserStore();

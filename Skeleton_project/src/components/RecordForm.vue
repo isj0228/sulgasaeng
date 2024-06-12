@@ -5,21 +5,33 @@
         </div>
         <form @submit.prevent="addNewTransaction">
             <div class="form-group">
-                <label for="transactionDate" class="form-label">Date</label>
+                <label for="transactionDate" class="form-label">날짜</label>
                 <input id="transactionDate" v-model="newTransaction.date" type="date" class="form-control" required>
             </div>
             <div class="form-group">
-                <p for="transactionType" class="form-label">Type</p>
-                <input v-model="newTransaction.type" id="transactionType" type="radio" name="type" value="입금" required> 입금
-                <input v-model="newTransaction.type" id="transactionType" type="radio" name="type" value="출금" class="ms-3" required> 출금
+                <p for="transactionType" class="form-label">분류</p>
+                <div class="form-check form-check-inline">
+                    <input v-model="newTransaction.type" class="form-check-input" type="radio" name="transactionHistory" id="exampleRadios1"
+                        value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        입금
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input v-model="newTransaction.type" class="form-check-input" type="radio" name="transactionHistory" id="exampleRadios2"
+                        value="option2">
+                    <label class="form-check-label" for="exampleRadios2">
+                        출금
+                    </label>
+                </div>
             </div>
             <div class="form-group">
-                <label for="transactionAmount" class="form-label">Amount</label>
+                <label for="transactionAmount" class="form-label">금액</label>
                 <input id="transactionAmount" v-model="newTransaction.amount" type="number" class="form-control"
                     placeholder="금액을 입력하세요." required>
             </div>
             <div class="form-group">
-                <label for="transactionCategory" class="form-label">Category</label>
+                <label for="transactionCategory" class="form-label">카테고리</label>
                 <select id="transactionCategory" v-model="selectedCategory" class="form-select"
                     @change="handleCategoryChange">
                     <option disabled value="">Select a category</option>
@@ -33,9 +45,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="transactionDesc" class="form-label">Description</label>
-                <textarea v-model="newTransaction.desc" class="form-control" id="transactionDesc"
-                    rows="3"></textarea>
+                <label for="transactionDesc" class="form-label">내용</label>
+                <textarea v-model="newTransaction.desc" class="form-control" id="transactionDesc" rows="3"></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-user btn-block">등록하기</button>
         </form>

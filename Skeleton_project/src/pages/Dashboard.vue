@@ -3,11 +3,11 @@
     <h2>대시보드</h2>
     <Record />
   </div> -->
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-  </div>
+  <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">모아보기</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+  </div> -->
 
   <div class="row">
     <div class="col-xl-3 col-md-6 mb-4">
@@ -17,10 +17,10 @@
       <OutcomeCard />
     </div>
     <div class="col-xl-3 col-md-6 mb-4">
-      <Card2 />
+      <PlanCard />
     </div>
     <div class="col-xl-3 col-md-6 mb-4">
-      <Card4 />
+      <GoalCard />
     </div>
   </div>
 
@@ -35,14 +35,7 @@
         </div>
       </div>
 
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">최근 내역</h6>
-        </div>
-        <div class="card-body">
-          <Record />
-        </div>
-      </div>
+      <PieChart/>
     </div>
     <div class="col-lg-4 mb-4">
       <div class="card shadow mb-4">
@@ -56,11 +49,12 @@
 
 <script setup>
 import Record from "@/pages/Card_Record.vue" // Record1.vue를 불러옵니다
-import Card2 from "@/components/Card2.vue"
 import RecordForm from "@/components/RecordForm.vue"
-import IncomeCard from "../components/IncomeCard.vue";
-import OutcomeCard from "../components/OutcomeCard.vue"
-
+import IncomeCard from "../components/card/IncomeCard.vue";
+import OutcomeCard from "../components/card/OutcomeCard.vue"
+import PlanCard from "@/components/card/PlanCard.vue"
+import GoalCard from "../components/card/GoalCard.vue"
+import PieChart from '@/components/chart/PieChart.vue'
 </script>
 
 <style lang="scss" scoped></style>
