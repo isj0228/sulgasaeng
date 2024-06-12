@@ -17,10 +17,10 @@
       <OutcomeCard />
     </div>
     <div class="col-xl-3 col-md-6 mb-4">
-      <Card2 />
+      <PlanCard />
     </div>
     <div class="col-xl-3 col-md-6 mb-4">
-      <Card4 />
+      <GoalCard />
     </div>
   </div>
 
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <Pie/>
+      <PieChart/>
     </div>
     <div class="col-lg-4 mb-4">
       <div class="card shadow mb-4">
@@ -49,11 +49,12 @@
 
 <script setup>
 import Record from "@/pages/Card_Record.vue" // Record1.vue를 불러옵니다
-import Card2 from "@/components/Card2.vue"
 import RecordForm from "@/components/RecordForm.vue"
-import IncomeCard from "../components/IncomeCard.vue";
-import OutcomeCard from "../components/OutcomeCard.vue"
-
+import IncomeCard from "../components/card/IncomeCard.vue";
+import OutcomeCard from "../components/card/OutcomeCard.vue"
+import PlanCard from "@/components/card/PlanCard.vue"
+import GoalCard from "../components/card/GoalCard.vue"
+import PieChart from '@/components/chart/PieChart.vue'
 </script>
 
 <style lang="scss" scoped></style>
