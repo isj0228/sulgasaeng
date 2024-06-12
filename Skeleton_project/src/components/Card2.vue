@@ -33,27 +33,26 @@ export default {
   data() {
     return {
       expensesData: [],
-      targetExpenses: 100000,
+      targetExpenses: 100000, // Default value
       showInputField: false, // Track whether to show the input field
       showButton: false, // Track whether to show the 수정 button
     };
   },
   computed: {
-    totalExpenses() {
-      const incomeExpenses = this.expensesData.filter(expense => expense.type === '입금');
+    totalOutcome() {
       const outcomeExpenses = this.expensesData.filter(expense => expense.type === '출금');
-      const totalIncome = incomeExpenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
       const totalOutcome = outcomeExpenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
-      return parseFloat((totalIncome - totalOutcome).toFixed(1)); // Calculate the difference between income and outcome, with 1 decimal place
+      return parseFloat(totalOutcome.toFixed(1)); // Calculate the total outcome, with 1 decimal place
     },
     progressWidth() {
-      return `${((this.totalExpenses / this.targetExpenses) * 100).toFixed(1)}%`;
+      return `${((this.totalOutcome / this.targetExpenses) * 100).toFixed(1)}%`;
     },
     progressValue() {
-      return parseFloat(((this.totalExpenses / this.targetExpenses) * 100).toFixed(1));
+      return parseFloat(((this.totalOutcome / this.targetExpenses) * 100).toFixed(1));
     },
   },
   mounted() {
+    this.loadTargetExpenses();
     this.fetchExpensesData();
   },
   methods: {
@@ -66,11 +65,20 @@ export default {
       }
     },
     updateTargetExpenses() {
-      // Optional: Add logic here to handle updating the goal amount
+      this.saveTargetExpenses();
     },
     toggleInputField() {
       // Toggle the visibility of the input field
       this.showInputField = !this.showInputField;
+    },
+    saveTargetExpenses() {
+      localStorage.setItem('targetExpenses', this.targetExpenses);
+    },
+    loadTargetExpenses() {
+      const savedTarget = localStorage.getItem('targetExpenses');
+      if (savedTarget !== null) {
+        this.targetExpenses = parseFloat(savedTarget);
+      }
     },
   },
 };

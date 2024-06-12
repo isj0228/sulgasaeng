@@ -20,7 +20,7 @@
       <Card2 />
     </div>
     <div class="col-xl-3 col-md-6 mb-4">
-      <Card2 />
+      <Card4 />
     </div>
   </div>
 
@@ -55,12 +55,11 @@
 </template>
 
 <script setup>
-import Record from "@/pages/Record1.vue" // Record1.vue를 불러옵니다
+import Record from "@/pages/Card_Record.vue" // Record1.vue를 불러옵니다
 import Card2 from "@/components/Card2.vue"
 import RecordForm from "@/components/RecordForm.vue"
 import IncomeCard from "../components/IncomeCard.vue";
 import OutcomeCard from "../components/OutcomeCard.vue"
-
 
 </script>
 

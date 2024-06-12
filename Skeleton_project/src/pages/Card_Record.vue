@@ -14,7 +14,7 @@
           <tbody>
             <tr v-for="transaction in recentTransactions" :key="transaction.id">
               <td>{{ transaction.date }}</td>
-              <td :class="transaction.type === 'income' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
+              <td :class="transaction.type === '입금' ? 'text-success' : 'text-danger'">{{ transaction.type }}</td>
               <td>{{ transaction.amount }}</td>
               <td><span class="badge bg-secondary text-light">{{ transaction.category }}</span></td>
             </tr>
