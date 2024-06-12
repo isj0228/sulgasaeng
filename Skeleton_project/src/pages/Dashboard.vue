@@ -35,14 +35,7 @@
         </div>
       </div>
 
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">최근 내역</h6>
-        </div>
-        <div class="card-body">
-          <Record />
-        </div>
-      </div>
+      <Pie/>
     </div>
     <div class="col-lg-4 mb-4">
       <div class="card shadow mb-4">
@@ -59,7 +52,7 @@ import Record from "@/pages/Card_Record.vue" // Record1.vue를 불러옵니다
 import Card1 from "@/components/Card1.vue"
 import Card2 from "@/components/Card2.vue"
 import RecordForm from "@/components/RecordForm.vue"
-
+import Pie from "@/components/PieChart.vue"
 
 </script>
 
