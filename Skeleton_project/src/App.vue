@@ -14,7 +14,7 @@
 
 <script setup>
 import Topbar from '@/components/Topbar.vue'
-import Sidebar from '@/components/Sidebar.vue'
+// import Sidebar from '@/components/Sidebar.vue'
 
 import { useUserStore } from '@/stores/userStore.js'
 const { fetchUser } = useUserStore();
