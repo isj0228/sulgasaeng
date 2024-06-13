@@ -79,7 +79,7 @@
         </tbody>
       </table>
       <!-- 페이지 네비게이션 -->
-      <div class="d-flex justify-content-between mb-3">
+      <div class="d-flex justify-content-between mb-3 pb-3">
         <button class="btn btn-primary" @click="prevPage" :disabled="currentPage === 1">이전</button>
         <span>Page {{ currentPage }} of {{ totalPages }}</span>
         <button class="btn btn-primary" @click="nextPage" :disabled="currentPage === totalPages">다음</button>
