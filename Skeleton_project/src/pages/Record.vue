@@ -13,7 +13,7 @@
           </select>
         </div>
       </div>
-      <div class="row mb-3">
+      <div class="row mb-3 mx-0 w-100">
         <form @submit.prevent="addNewTransaction" class="row">
           <div class="col-md-2">
             <input v-model="newTransaction.date" type="date" class="form-control" placeholder="Date" required />
@@ -45,8 +45,10 @@
           <div class="col-md-3">
             <input v-model="newTransaction.desc" class="form-control" placeholder="내용" required />
           </div>
-          <div class="col-md-1 pe-0">
-            <button type="submit" class="btn btn-success w-100">내역 추가</button>
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-success w-100 add-button">
+              내역 추가
+            </button>
           </div>
         </form>
       </div>
@@ -286,5 +288,17 @@
   tr {
     cursor: pointer;
   }
+
+.add-button {
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    overflow: hidden; /* 텍스트가 넘칠 경우 숨기기 */
+    text-overflow: ellipsis; /* 텍스트가 넘칠 경우 생략 부호(...) */
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    padding: 0.375rem 0.75rem; /* 적절한 패딩 값 */
+    height: 100%; /* 부모 요소의 높이를 가득 채우도록 설정 */
+}
+
   </style>
   
