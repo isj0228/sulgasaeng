@@ -1,69 +1,59 @@
 <template>
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
         <div class="d-flex d-md-none align-items-center justify-content-between w-100">
-
-            <!-- <button id="sidebarToggleTop" class="btn btn-link rounded-circle custom-hover-button"
-                @mouseover="showDropdown" @mouseleave="hideDropdown">
-                <i class="fa fa-bars"></i>
-            </button> -->
-            <!-- <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="fa fa-bars"></i>
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div> -->
             <div class="nav-item dropdown no-arrow mx-1">
+
+                <!-- 화면이 작아지면 나타나는 드롭다운 버튼 -->
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-bars"></i>
                 </a>
-                <!-- Dropdown - Alerts -->
+                <!-- 화면이 작아지면 나타나는 메뉴 -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="alertsDropdown">
                     <h6 class="dropdown-header fs-6">
                         슬기로운 가계부 생활
                     </h6>
-                    <a class="dropdown-item d-flex align-items-center py-3" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-primary">
-                                <i class="fas fa-house text-white"></i>
+                    <router-link to="/">
+                        <a class="dropdown-item d-flex align-items-center py-3">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-primary">
+                                    <i class="fas fa-house text-white"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <span class="font-weight-bold">HOME</span>
-                        </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center py-3" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-success">
-                                <i class="fas fa-table-list text-white"></i>
+                            <span class="text-gray-900">HOME</span>
+                        </a>
+                    </router-link>
+                    <router-link to="/record">
+                        <a class="dropdown-item d-flex align-items-center py-3">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-success">
+                                    <i class="fas fa-table-list text-white"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            RECORD
-                        </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center py-3" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-warning">
-                                <i class="fas fa-chart-line text-white"></i>
+                            <div>
+                                <span class="text-gray-900">RECORD</span>
                             </div>
-                        </div>
-                        <div>
-                            REPORT
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </router-link>
+                    <router-link to="/chart">
+                        <a class="dropdown-item d-flex align-items-center py-3">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-warning">
+                                    <i class="fas fa-chart-line text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="text-gray-900">REPORT</span>
 
+                            </div>
+                        </a>
+                    </router-link>
+
+                </div>
             </div>
 
-
+            <!-- 유저 정보 -->
             <ul class="navbar-nav d-flex flex-row align-items-center">
                 <div class="topbar-divider d-sm-block"></div>
                 <li class="nav-item dropdown no-arrow">
@@ -75,10 +65,12 @@
             </ul>
         </div>
 
+        <!-- 제목 로고 -->
         <router-link to="/" class="nav-link d-none d-md-block" id="tobar-title">
             <h3 class="mt-2 mb-0">슬기로운 가계부 생활</h3>
         </router-link>
 
+        <!-- 메뉴 이동 -->
         <ul class="navbar-nav ml-auto d-none d-md-flex">
             <li class="nav-item active">
                 <router-link class="nav-link" to="/">
@@ -110,9 +102,6 @@
             </li>
         </ul>
     </nav>
-
-
-
 </template>
 
 <script setup>
@@ -131,43 +120,10 @@ const hideDropdown = () => {
     dropdownVisible.value = false;
     console.log(dropdownVisible.value);
 };
-
 </script>
 
 <style scoped>
-/* 추가적인 스타일이 필요하다면 여기에 작성하세요 */
 .custom-hover-button {
     transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.position-relative {
-    position: relative;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    border: 1px solid #ddd;
-    z-index: 1000;
-    min-width: 200px;
-    display: none;
-}
-
-.dropdown-menu.show {
-    display: block;
-}
-
-.dropdown-item {
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #333;
-    display: block;
-}
-
-.dropdown-item:hover {
-    background-color: #f8f9fa;
 }
 </style>
