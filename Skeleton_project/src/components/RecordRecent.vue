@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">Loading...</div>
-    <div v-else>
+    <div v-else class="table-responsive-sm">
       <table class="table" @click="navigateToRecord">
         <thead>
           <tr>
