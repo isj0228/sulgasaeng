@@ -18,7 +18,7 @@
     <div class="col-lg-8 mb-4">
       <div class="card shadow mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 card-title">최근 내역</h6>
+          <h6 class="mb-0 mt-1 card-title">최근 내역</h6>
         </div>
         <div class="card-body">
           <Record />
