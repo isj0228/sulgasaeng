@@ -1,14 +1,17 @@
 <template>
   <div>
-    <div class="month-selector">
-      <select v-model="selectedMonth" @change="fetchData">
-        <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
-      </select>
+    <div class="month-selector form-group row justify-content-center">
+      <label for="selectMonth" class="col-sm-2 col-form-label">월 선택:</label>
+      <div class="col-sm-4">
+        <select id="selectMonth" class="form-control" v-model="selectedMonth" @change="fetchData">
+          <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
+        </select>
+      </div>
     </div>
 
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">입금별 소비</h6>
+        <h6 class="m-0 font-weight-bold text-primary">소득 분석</h6>
       </div>
       <div class="card-body">
         <div class="row">
@@ -27,7 +30,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">출금별 소비</h6>
+        <h6 class="m-0 font-weight-bold text-primary">소비 분석</h6>
       </div>
       <div class="card-body">
         <div class="row">
@@ -45,6 +48,8 @@
     </div>
   </div>
 </template>
+
+
 
 
 <script>
@@ -100,16 +105,21 @@ export default {
       }
     },
     getMonthNames() {
-      return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      return ["1월", "2월", "3월", "4월", "5월", "6월","7월","8월","9월", "10월","11월","12월"];
     },
     getMonthNameFromDate(date) {
       const monthNames = this.getMonthNames();
       return monthNames[new Date(date).getMonth()];
     },
     processChartData(data) {
-      const categories = data.map(item => item.category);
-      const amounts = data.map(item => parseFloat(item.amount));
-      return { categories, amounts };
+      const result = data.reduce((acc, { category, amount }) => {
+      acc[category] = (acc[category] || 0) + parseFloat(amount);
+      return acc;
+    }, {});
+    return {
+      categories: Object.keys(result),
+      amounts: Object.values(result),
+  };
     },
     calculateTotalAmount(chartData) {
       return chartData.amounts.reduce((acc, curr) => acc + curr, 0);
@@ -169,16 +179,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .month-selector {
-  display: flex;
-  justify-content: center;
   margin-bottom: 20px;
 }
 
-.month-selector select {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+#totalDepositAmount,
+#totalWithdrawalAmount {
+  font-weight: bold;
 }
 </style>
