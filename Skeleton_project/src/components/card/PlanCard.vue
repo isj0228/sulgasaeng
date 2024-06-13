@@ -3,8 +3,7 @@
     <div class="card-body">
       <div class="row no-gutters align-items-center">
         <div class="col mr-2">
-          <div class="font-weight-bold text-info text-uppercase mb-1">지출 계획
-          </div>
+          <div class="font-weight-bold text-info text-uppercase mb-1">{{ month }}월 지출 계획</div>
           <div class="row no-gutters align-items-center">
             <div class="col-auto">
               <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ progressValue }}%</div>
@@ -13,7 +12,6 @@
               <div class="progress progress-sm mr-2">
                 <div class="progress-bar bg-info" role="progressbar" :style="{ width: progressWidth }"
                   :aria-valuenow="progressValue" aria-valuemin="0" aria-valuemax="100"></div>
-
               </div>
             </div>
           </div>
@@ -23,91 +21,78 @@
         </div>
       </div>
       <button v-show="showButton" class="btn btn-primary btn-sm position-absolute top-0 end-0 mt-2 me-2"
-          @click="toggleInputField">수정</button>
-        <!-- Input field for "목표 소비 금액" -->
-        <div v-if="showInputField" class="input-group mb-3">
-          <input type="number" class="form-control" v-model="targetExpenses" @change="updateTargetExpenses"
-            placeholder="목표 소비 금액" aria-label="목표 소비 금액" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <span class="input-group-text" id="basic-addon2">원</span>
-          </div>
+        @click="toggleInputField">수정</button>
+      <!-- Input field for "목표 소비 금액" -->
+      <div v-if="showInputField" class="input-group mb-3">
+        <input type="number" class="form-control" v-model="targetExpenses" @change="updateTargetExpenses"
+          placeholder="목표 소비 금액" aria-label="목표 소비 금액" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">원</span>
         </div>
-
-      <!-- <div class="text-xs font-weight-bold text-info text-uppercase mb-1">지출 계획</div>
-      <div class="text-center">
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="col-auto">
-            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-          </div>
-          <div class="progress progress-lg flex-grow-1 mb-3" style="height: 10px;">
-            <div class="progress-bar bg-info" role="progressbar" :style="{ width: progressWidth }"
-              :aria-valuenow="progressValue" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-        <div class="text-gray-800 mb-1">{{ progressValue }} %</div>
-        Button to toggle input field
-        
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted, watch } from 'vue';
 import axios from 'axios';
+import { useBudgetStore } from '@/stores/budgetStore.js';
 
-export default {
-  data() {
-    return {
-      expensesData: [],
-      targetExpenses: 100000, // Default value
-      showInputField: false, // Track whether to show the input field
-      showButton: false, // Track whether to show the 수정 button
-    };
-  },
-  computed: {
-    totalOutcome() {
-      const outcomeExpenses = this.expensesData.filter(expense => expense.type === '출금');
-      const totalOutcome = outcomeExpenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
-      return parseFloat(totalOutcome.toFixed(1)); // Calculate the total outcome, with 1 decimal place
-    },
-    progressWidth() {
-      return `${((this.totalOutcome / this.targetExpenses) * 100).toFixed(1)}%`;
-    },
-    progressValue() {
-      return parseFloat(((this.totalOutcome / this.targetExpenses) * 100).toFixed(1));
-    },
-  },
-  mounted() {
-    this.loadTargetExpenses();
-    this.fetchExpensesData();
-  },
-  methods: {
-    async fetchExpensesData() {
-      try {
-        const response = await axios.get('../../db-server/db.json');
-        this.expensesData = response.data['budget-list'];
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    },
-    updateTargetExpenses() {
-      this.saveTargetExpenses();
-    },
-    toggleInputField() {
-      // Toggle the visibility of the input field
-      this.showInputField = !this.showInputField;
-    },
-    saveTargetExpenses() {
-      localStorage.setItem('targetExpenses', this.targetExpenses);
-    },
-    loadTargetExpenses() {
-      const savedTarget = localStorage.getItem('targetExpenses');
-      if (savedTarget !== null) {
-        this.targetExpenses = parseFloat(savedTarget);
-      }
-    },
-  },
+const budgetStore = useBudgetStore();
+const expensesData = ref([]);
+const targetExpenses = ref(100000);
+const showInputField = ref(false);
+const showButton = ref(false);
+
+const month = new Date().getMonth() + 1;
+
+// Function to fetch expenses data from JSON server
+const fetchExpensesData = async () => {
+  try {
+    const response = await axios.get('../../db-server/db.json');
+    expensesData.value = response.data['budget-list'];
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 };
+
+// Compute total outcome based on fetched expenses data
+const computeTotalOutcome = () => {
+  const outcomeExpenses = expensesData.value.filter(expense => expense.type === '출금');
+  return outcomeExpenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
+};
+
+// Compute progress width and value based on total outcome and target expenses
+const progressWidth = computed(() => {
+  return `${((computeTotalOutcome() / targetExpenses.value) * 100).toFixed(1)}%`;
+});
+
+const progressValue = computed(() => {
+  return parseFloat(((computeTotalOutcome() / targetExpenses.value) * 100).toFixed(1));
+});
+
+// Watch for changes in budgetStore.transactions and update expenses data accordingly
+watch(() => budgetStore.transactions, async () => {
+  try {
+    const response = await axios.get('../../db-server/db.json');
+    expensesData.value = response.data['budget-list'];
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}, { deep: true });
+
+const toggleInputField = () => {
+  showInputField.value = !showInputField.value;
+};
+
+const updateTargetExpenses = () => {
+  localStorage.setItem('targetExpenses', targetExpenses.value);
+};
+
+// On component mount, fetch initial expenses data
+onMounted(fetchExpensesData);
+
 </script>
 
 <style scoped>
