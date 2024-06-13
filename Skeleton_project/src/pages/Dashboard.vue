@@ -18,7 +18,7 @@
     <div class="col-lg-8 mb-4">
       <div class="card shadow mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">최근 내역</h6>
+          <h6 class="m-0 card-title">최근 내역</h6>
         </div>
         <div class="card-body">
           <Record />
@@ -47,4 +47,6 @@ import GoalCard from "@/components/card/GoalCard.vue"
 import PieChart from '@/components/chart/PieChart.vue'
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

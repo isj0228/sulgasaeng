@@ -81,7 +81,11 @@ body {
   outline: 0 !important;
 }
 
+.card-title{
+  color: #3a3b45;
+  font-weight: 700;
 
+}
 .profile-photo {
   width: 100px;
   height: 100px;
