@@ -1,7 +1,7 @@
 <template>
     <div class="p-5">
         <div class="text-center">
-            <h1 class="h4 text-gray-900 mb-4">빠른 등록</h1>
+            <h3 class="fw-bold text-gray-900 mb-4">빠른 등록</h3>
         </div>
         <form @submit.prevent="addNewTransaction">
             <div class="form-group">
