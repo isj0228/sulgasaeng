@@ -2,7 +2,7 @@
   <div>
     <div v-if="loading">Loading...</div>
     <div v-else>
-      <table class="table">
+      <table class="table" @click="navigateToRecord">
         <thead>
           <tr>
             <th>날짜</th>
@@ -11,7 +11,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="transaction in recentTransactions" :key="transaction.id" @click="navigateToRecord(transaction.id)">
+          <tr v-for="transaction in recentTransactions" :key="transaction.id" >
             <td>{{ transaction.date }}</td>
             <td v-if="transaction.type === '입금'" class="text-success"><i class="fa-solid fa-circle-plus me-3"></i>{{ transaction.amount }}</td>
             <td v-else class="text-danger"><i class="fa-solid fa-square-minus me-3"></i>{{ transaction.amount }}</td>
@@ -42,7 +42,7 @@ export default defineComponent({
     });
 
     // 특정 라우터로 이동하는 함수
-    const navigateToRecord = (transactionId) => {
+    const navigateToRecord = () => {
       router.push({ path: `/record` });
     };
 
