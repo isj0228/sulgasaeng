@@ -1,4 +1,5 @@
 <template>
+  <!-- 카드 컴포넌트 시작 -->
   <div class="card border-left-info shadow h-100 py-2" @mouseover="showButton = true" @mouseleave="showButton = false">
     <div class="card-body">
       <div class="row no-gutters align-items-center">
@@ -37,25 +38,26 @@
       </div>
     </div>
   </div>
+  <!-- 카드 컴포넌트 종료 -->
 </template>
 
 <script setup>
-// Vue 및 다른 라이브러리에서 필요한 모듈 및 함수 가져오기
+// Vue 및 다른 필요한 모듈 및 함수 가져오기
 import { ref, computed, onMounted, watch } from 'vue';
 import axios from 'axios';
 import { useBudgetStore } from '@/stores/budgetStore.js';
 
-// 반응형 데이터 속성을 위한 참조 생성
+// 반응형 데이터 속성에 대한 참조 생성
 const budgetStore = useBudgetStore();
 const expensesData = ref([]);
-const targetExpenses = ref(100000);
+const targetExpenses = ref(parseInt(localStorage.getItem('targetExpenses')) || 100000); // 로컬 저장소에서 초기화
 const showInputField = ref(false);
 const showButton = ref(false);
 
 // 현재 월 가져오기
 const month = new Date().getMonth() + 1;
 
-// JSON 서버에서 지출 데이터 가져오는 함수
+// JSON 서버에서 지출 데이터를 가져오는 함수
 const fetchExpensesData = async () => {
   try {
     const response = await axios.get('../../db-server/db.json');
@@ -67,7 +69,7 @@ const fetchExpensesData = async () => {
 
 // 가져온 지출 데이터를 기반으로 현재 월의 총 지출 계산
 const computeTotalOutcome = () => {
-  // 현재 월의 지출을 필터링하고 합산
+  // 현재 월의 지출 필터링 및 합산
   const currentMonthExpenses = expensesData.value.filter(expense => {
     const expenseDate = new Date(expense.date); // expense.date가 표준 형식이라고 가정
     return expenseDate.getMonth() + 1 === month && expense.type === '출금';
@@ -75,7 +77,7 @@ const computeTotalOutcome = () => {
   return currentMonthExpenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
 };
 
-// 총 지출 및 목표 지출을 기반으로 진행률 너비 및 값 계산
+// 진행률 막대의 너비와 값 계산
 const progressWidth = computed(() => {
   return `${((computeTotalOutcome() / targetExpenses.value) * 100).toFixed(1)}%`;
 });
@@ -101,7 +103,7 @@ const toggleInputField = () => {
 
 // 목표 지출 업데이트 함수
 const updateTargetExpenses = () => {
-  localStorage.setItem('targetExpenses', targetExpenses.value);
+  localStorage.setItem('targetExpenses', targetExpenses.value.toString());
 };
 
 // 컴포넌트가 마운트될 때 초기 지출 데이터 가져오기

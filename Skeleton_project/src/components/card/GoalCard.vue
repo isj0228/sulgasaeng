@@ -4,7 +4,7 @@
     <div class="card-body">
       <div class="row no-gutters align-items-center">
         <div class="col mr-2">
-          <div class="font-weight-bold text-warning text-uppercase mb-1">목표금액 채우기
+          <div class="font-weight-bold text-warning text-uppercase mb-1">{{ month }}월 목표금액 채우기
           </div>
           <div class="row no-gutters align-items-center">
             <div class="col-auto">
@@ -38,63 +38,57 @@
   </div>
 </template>
 
-<script>
-import axios from 'axios';
+<script setup>
+import { ref, watch, watchEffect, computed } from 'vue';
+import { monthlyInput } from '../../service/monthlySummary';
+import { useBudgetStore } from '@/stores/budgetStore.js';
 
-export default {
-  data() {
-    return {
-      expensesData: [],
-      targetExpenses: 500000,
-      showInputField: false, // Track whether to show the input field
-      showButton: false, // Track whether to show the 수정 button
-    };
-  },
-  computed: {
-    totalExpenses() {
-      const incomeExpenses = this.expensesData.filter(
-        (expense) => expense.type === '입금'
-      );
-      const totalIncome = incomeExpenses.reduce(
-        (acc, expense) => acc + parseFloat(expense.amount),
-        0
-      );
-      return totalIncome;
-    },
-    progressWidth() {
-      return `${((this.totalExpenses / this.targetExpenses) * 100).toFixed(
-        1
-      )}%`;
-    },
-    progressValue() {
-      return parseFloat(
-        ((this.totalExpenses / this.targetExpenses) * 100).toFixed(1)
-      );
-    },
-  },
-  mounted() {
-    this.fetchExpensesData();
-  },
-  methods: {
-    async fetchExpensesData() {
-      try {
-        const response = await axios.get('../../db-server/db.json');
-        this.expensesData = response.data['budget-list'];
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    },
-    updateTargetExpenses() {
-      // Optional: Add logic here to handle updating the goal amount
-    },
-    toggleInputField() {
-      // Toggle the visibility of the input field
-      this.showInputField = !this.showInputField;
-    },
-  },
+const budgetStore = useBudgetStore();
+const totalInput = ref(0);
+const isLoading = ref(true);
+const showInputField = ref(false);
+const showButton = ref(false);
+const targetExpenses = ref(100000);
+const month = new Date().getMonth() + 1;
+
+const toggleInputField = () => {
+  showInputField.value = !showInputField.value;
 };
-</script>
 
+//현재 월 기준 총합 (20,000 형식으로 넘어와서 number로 형변환)
+const updateTotalInput = () => {
+  const input = monthlyInput();
+  const sanitizedInput = input.replace(/,/g, ''); // 쉼표 제거
+  totalInput.value = Number(sanitizedInput) || 0;
+  isLoading.value = false;  
+};
+//현재 월 기준 총 수입/목표금액
+const progressWidth = computed(() => {
+   return `${((totalInput.value / targetExpenses.value) * 100).toFixed(1)}%`;
+});
+//현재 월 기준 총 수입/목표금액
+const progressValue = computed(() => {
+  return parseFloat(((totalInput.value / targetExpenses.value) * 100).toFixed(1));
+});
+
+watch(() => budgetStore.transactions, () => {
+  updateTotalInput();
+  updateTargetExpenses();
+
+}, { deep: true });
+
+updateTotalInput();
+//목표금액 변경 시 update
+const updateTargetExpenses = () => {
+  localStorage.setItem('targetIncomes', targetExpenses.value);
+};
+
+//바꾼 금액 저장해서 새로고침 해도 값 유지 가능하게 함
+const savedTarget = localStorage.getItem('targetIncomes');
+if (savedTarget !== null) {
+  targetExpenses.value = parseFloat(savedTarget);
+}
+</script>
 <style scoped>
 .position-absolute {
   position: absolute;
