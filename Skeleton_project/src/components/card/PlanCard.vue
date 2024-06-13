@@ -57,10 +57,13 @@ const fetchExpensesData = async () => {
   }
 };
 
-// Compute total outcome based on fetched expenses data
+// Compute total outcome for the current month based on fetched expenses data
 const computeTotalOutcome = () => {
-  const outcomeExpenses = expensesData.value.filter(expense => expense.type === '출금');
-  return outcomeExpenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
+  const currentMonthExpenses = expensesData.value.filter(expense => {
+    const expenseDate = new Date(expense.date); // assuming expense.date is in a standard format
+    return expenseDate.getMonth() + 1 === month && expense.type === '출금';
+  });
+  return currentMonthExpenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
 };
 
 // Compute progress width and value based on total outcome and target expenses
