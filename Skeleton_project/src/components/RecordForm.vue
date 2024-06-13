@@ -63,6 +63,8 @@ const budgetStore = useBudgetStore()
 const loading = ref(true)
 //카테고리가 변경되면 바로 반응하게 computed를 사용
 const categories = computed(() => budgetStore.categories)
+
+// 사용자 내역 입력값 바인딩
 const newTransaction = ref({
     date: '',
     type: '입금',
@@ -76,6 +78,7 @@ const newCategory = ref('')
 const incomeCategories = computed(() => budgetStore.incomeCategories)
 const outcomeCategories = computed(() => budgetStore.outcomeCategories)
 
+// pinia json-db에 추가
 const addNewTransaction = async () => {
     if (selectedCategory.value === 'add-new') {
         newTransaction.value.category = newCategory.value
