@@ -25,7 +25,7 @@
             </select>
           </div>
           <div class="col-md-2">
-            <input v-model="newTransaction.amount" type="number" class="form-control" placeholder="Amount" required />
+            <input v-model="newTransaction.amount" type="number" class="form-control" placeholder="금액" required />
           </div>
   
           <div class="col-md-2">
@@ -43,7 +43,7 @@
           </div>
   
           <div class="col-md-3">
-            <input v-model="newTransaction.desc" class="form-control" placeholder="Description" required />
+            <input v-model="newTransaction.desc" class="form-control" placeholder="내용" required />
           </div>
           <div class="col-md-1 pe-0">
             <button type="submit" class="btn btn-success w-100">내역 추가</button>
@@ -77,9 +77,9 @@
         </table>
         <!-- 페이지 네비게이션 -->
         <div class="d-flex justify-content-between mb-3">
-          <button class="btn btn-primary" @click="prevPage" :disabled="currentPage === 1">Previous</button>
+          <button class="btn btn-primary" @click="prevPage" :disabled="currentPage === 1">이전</button>
           <span>Page {{ currentPage }} of {{ totalPages }}</span>
-          <button class="btn btn-primary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+          <button class="btn btn-primary" @click="nextPage" :disabled="currentPage === totalPages">다음</button>
         </div>
   
         <!-- 새로운 내역 추가 폼 -->
