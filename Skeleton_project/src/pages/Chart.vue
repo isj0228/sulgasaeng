@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <!-- PieCombined 컴포넌트와 BarChart 컴포넌트를 렌더링 -->
-    <PieCombined />
+  <PieCombined />
+  <div class="row">
     <BarChart />
   </div>
 </template>

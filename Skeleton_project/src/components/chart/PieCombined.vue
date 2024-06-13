@@ -1,52 +1,50 @@
 <template>
-  <div>
-    <div class="month-selector form-group row justify-content-center">
-      <label for="selectMonth" class="col-sm-2 col-form-label">월 선택:</label>
-      <div class="col-sm-4">
-        <select id="selectMonth" class="form-control" v-model="selectedMonth" @change="fetchData">
-          <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
-        </select>
-      </div>
-    </div>
-
+  <div class="row">
     <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">소득 분석</h6>
-      </div>
       <div class="card-body">
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="chart-pie pt-4">
-              <canvas id="depositPieChart"></canvas>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div id="depositPieChartLegend" class="mt-4"></div>
-            <div id="totalDepositAmount" class="mt-4">총 입금액: {{ totalDepositAmount }}원</div>
+        <div class="row mb-3">
+          <div class="col-lg-2">
+            <select class="form-select" v-model="selectedMonth" @change="fetchData">
+              <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
+            </select>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">소비 분석</h6>
-      </div>
-      <div class="card-body">
         <div class="row">
-          <div class="col-lg-8">
-            <div class="chart-pie pt-4">
-              <canvas id="withdrawalPieChart"></canvas>
+          <div class="col-lg-6 border-right-lg">
+            <div class="row align-items-center">
+              <div class="col-lg-8">
+                <span class="card-title mb-0 mt-1 bg-gray-400 p-1">소득 분석</span>
+                <div class="chart-pie pt-4">
+                  <canvas id="depositPieChart"></canvas>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div id="depositPieChartLegend" class="mt-4"></div>
+                <div id="totalDepositAmount" class="mt-4">총 입금액: {{ totalDepositAmount }}원</div>
+              </div>
             </div>
           </div>
-          <div class="col-lg-4">
-            <div id="withdrawalPieChartLegend" class="mt-4"></div>
-            <div id="totalWithdrawalAmount" class="mt-4">총 출금액: {{ totalWithdrawalAmount }}원</div>
+
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-8">
+                <span class="card-title mb-0 mt-1 bg-gray-400 p-1">소비 분석</span>
+                <div class="chart-pie pt-4">
+                  <canvas id="withdrawalPieChart"></canvas>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div id="withdrawalPieChartLegend" class="mt-4"></div>
+                <div id="totalWithdrawalAmount" class="mt-4">총 출금액: {{ totalWithdrawalAmount }}원</div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -91,13 +89,13 @@ export default {
 
         const depositData = transactions.filter(item => item.type === '입금'); // 입금 데이터 필터링
         const withdrawalData = transactions.filter(item => item.type === '출금'); // 출금 데이터 필터링
-        
+
         this.depositChartData = this.processChartData(depositData); // 입금 차트 데이터 처리
         this.withdrawalChartData = this.processChartData(withdrawalData); // 출금 차트 데이터 처리
-        
+
         this.totalDepositAmount = this.calculateTotalAmount(this.depositChartData); // 총 입금액 계산
         this.totalWithdrawalAmount = this.calculateTotalAmount(this.withdrawalChartData); // 총 출금액 계산
-        
+
         this.updatePieCharts(); // 파이 차트 업데이트
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -130,15 +128,15 @@ export default {
     // 파이 차트를 업데이트하는 메소드
     updatePieCharts() {
       this.updatePieChart(
-        "depositPieChart", 
-        "depositPieChartLegend", 
-        this.depositChartData, 
+        "depositPieChart",
+        "depositPieChartLegend",
+        this.depositChartData,
         this.totalDepositAmount
       );
       this.updatePieChart(
-        "withdrawalPieChart", 
-        "withdrawalPieChartLegend", 
-        this.withdrawalChartData, 
+        "withdrawalPieChart",
+        "withdrawalPieChartLegend",
+        this.withdrawalChartData,
         this.totalWithdrawalAmount
       );
     },
@@ -192,5 +190,20 @@ export default {
 #totalDepositAmount,
 #totalWithdrawalAmount {
   font-weight: bold;
+}
+
+.card-wrapper {
+  display: flex;
+}
+
+.card {
+  flex: 1;
+}
+
+@media (min-width: 992px) {
+  .border-right-lg {
+    border-right: 1px solid #d1d3e2;
+    /* 원하는 색상으로 변경 */
+  }
 }
 </style>

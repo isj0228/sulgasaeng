@@ -14,7 +14,7 @@
                     <h6 class="dropdown-header fs-6">
                         슬기로운 가계부 생활
                     </h6>
-                    <router-link to="/">
+                    <router-link to="/" active-class="active">
                         <a class="dropdown-item d-flex align-items-center py-3">
                             <div class="mr-3">
                                 <div class="icon-circle bg-primary">
@@ -24,7 +24,7 @@
                             <span class="text-gray-900">HOME</span>
                         </a>
                     </router-link>
-                    <router-link to="/record">
+                    <router-link to="/record" active-class="active">
                         <a class="dropdown-item d-flex align-items-center py-3">
                             <div class="mr-3">
                                 <div class="icon-circle bg-success">
@@ -36,7 +36,7 @@
                             </div>
                         </a>
                     </router-link>
-                    <router-link to="/chart">
+                    <router-link to="/chart" active-class="active">
                         <a class="dropdown-item d-flex align-items-center py-3">
                             <div class="mr-3">
                                 <div class="icon-circle bg-warning">
@@ -128,18 +128,18 @@
 
         <!-- 메뉴 이동 -->
         <ul class="navbar-nav ml-auto d-none d-md-flex">
-            <li class="nav-item active">
-                <router-link class="nav-link" to="/">
+            <li class="nav-item">
+                <router-link class="nav-link" to="/" active-class="active">
                     <span>홈</span>
                 </router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" to="/record">
+                <router-link class="nav-link" to="/record" active-class="active">
                     <span>내역</span>
                 </router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" to="/chart">
+                <router-link class="nav-link" to="/chart" active-class="active">
                     <span>보고서</span>
                 </router-link>
             </li>
@@ -241,5 +241,10 @@ const hideDropdown = () => {
 .dropdown-menu-right {
   right: 0;
   left: auto;
+}
+
+.active{
+    font-weight: 700;
+    color: #4e73df !important;
 }
 </style>

@@ -1,24 +1,22 @@
 <template>
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">주별 요약</h6>
-    </div>
     <div class="card-body">
-      <div class="form-group row justify-content-center">
-        <label for="selectMonth" class="col-sm-2 col-form-label">월 선택:</label>
-        <div class="col-sm-4">
-          <select id="selectMonth" class="form-control" v-model="selectedMonth" @change="fetchData">
+      <div class="row mb-3">
+        <div class="col-lg-2">
+          <select id="selectMonth" class="form-select" v-model="selectedMonth" @change="fetchData">
             <option v-for="(month, index) in months" :key="index" :value="month">{{ month }}</option>
           </select>
         </div>
       </div>
-      
+
+      <span class="card-title mb-0 mt-1 bg-gray-400 p-1">주별 요약</span>
+
       <div class="text-center mb-4">{{ selectedMonth }} 총 금액: {{ totalMonthlyAmount.toLocaleString() }}원</div>
-      
+
       <div class="chart-bar">
         <canvas id="myBarChart"></canvas>
       </div>
-      
+
       <div id="barChartTotals" class="mt-4"></div>
     </div>
   </div>
@@ -70,7 +68,7 @@ export default {
     },
     // 월 이름 배열 반환
     getMonthNames() {
-      return ["1월", "2월", "3월", "4월", "5월", "6월","7월","8월","9월", "10월","11월","12월"];
+      return ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
     },
     // 날짜로부터 월 이름을 추출
     getMonthNameFromDate(date) {

@@ -81,6 +81,23 @@ body {
   outline: 0 !important;
 }
 
+.card-title{
+  color: #3a3b45;
+  font-weight: 700;
+
+}
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  transition: box-shadow 0.3s ease;
+  /* 부드러운 전환 효과 */
+}
+
+.profile-photo:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* 그림자 효과 */
+}
+
 hr {
   box-sizing: content-box;
   height: 0;
