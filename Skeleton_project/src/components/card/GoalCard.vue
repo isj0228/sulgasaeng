@@ -4,7 +4,7 @@
     <div class="card-body">
       <div class="row no-gutters align-items-center">
         <div class="col mr-2">
-          <div class="font-weight-bold text-warning text-uppercase mb-1">목표금액 채우기
+          <div class="font-weight-bold text-warning text-uppercase mb-1">{{ month }}월 목표금액 채우기
           </div>
           <div class="row no-gutters align-items-center">
             <div class="col-auto">
@@ -49,6 +49,7 @@ const isLoading = ref(true);
 const showInputField = ref(false);
 const showButton = ref(false);
 const targetExpenses = ref(100000);
+const month = new Date().getMonth() + 1;
 
 const toggleInputField = () => {
   showInputField.value = !showInputField.value;
@@ -59,7 +60,7 @@ const updateTotalInput = () => {
   const input = monthlyInput();
   const sanitizedInput = input.replace(/,/g, ''); // 쉼표 제거
   totalInput.value = Number(sanitizedInput) || 0;
-  isLoading.value = false;
+  isLoading.value = false;  
 };
 //현재 월 기준 총 수입/목표금액
 const progressWidth = computed(() => {
