@@ -2,14 +2,14 @@
   <div class="row">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <div class="mb-3">
-          <!-- 월별 선택이 가능하도록 -->
-          <select class="form-select select-month" v-model="selectedMonth" @change="fetchData">
-            <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
-          </select>
+        <div class="row mb-3">
+          <div class="col-lg-2">
+            <select class="form-select" v-model="selectedMonth" @change="fetchData">
+              <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
+            </select>
+          </div>
         </div>
         <div class="row">
-
           <div class="col-lg-6 border-right-lg">
             <div class="row align-items-center">
               <div class="col-lg-8">
@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -200,13 +200,9 @@ export default {
   flex: 1;
 }
 
-.select-month {
-  width: 10%;
-}
-
 @media (min-width: 992px) {
   .border-right-lg {
-    border-right: 1px solid #d1d3e2 ;
+    border-right: 1px solid #d1d3e2;
     /* 원하는 색상으로 변경 */
   }
 }

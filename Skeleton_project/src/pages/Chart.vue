@@ -1,8 +1,5 @@
 <template>
   <PieCombined />
-  <!-- <div class="row">
-    <PieCombined />
-  </div> -->
   <div class="row">
     <BarChart />
   </div>
