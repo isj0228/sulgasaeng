@@ -107,9 +107,15 @@ export default {
       return monthNames[new Date(date).getMonth()];
     },
     processChartData(data) {
-      const categories = data.map(item => item.category);
-      const amounts = data.map(item => parseFloat(item.amount));
-      return { categories, amounts };
+      const result = data.reduce((acc, { category, amount }) => {
+      acc[category] = (acc[category] || 0) + parseFloat(amount);
+      return acc;
+    }, {});
+
+    return {
+      categories: Object.keys(result),
+      amounts: Object.values(result),
+  };
     },
     calculateTotalAmount(chartData) {
       return chartData.amounts.reduce((acc, curr) => acc + curr, 0);
