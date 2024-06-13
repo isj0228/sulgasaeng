@@ -35,7 +35,7 @@ export default {
       selectedMonth: '', // Initialize selectedMonth
       months: [], // Initialize months array
       totalMonthlyAmount: 0, // Initialize totalMonthlyAmount
-      weekLabels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+      weekLabels: ["1주차", "2주차", "3주차", "4주차"],
     };
   },
   mounted() {
