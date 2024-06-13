@@ -32,28 +32,30 @@ export default {
   data() {
     return {
       myBarChart: null,
-      selectedMonth: '', // Initialize selectedMonth
-      months: [], // Initialize months array
-      totalMonthlyAmount: 0, // Initialize totalMonthlyAmount
-      weekLabels: ["1주차", "2주차", "3주차", "4주차"],
+      selectedMonth: '', // 선택된 월 초기화
+      months: [], // 월 배열 초기화
+      totalMonthlyAmount: 0, // 총 월 금액 초기화
+      weekLabels: ["1주차", "2주차", "3주차", "4주차"], // 주차 레이블
     };
   },
   mounted() {
-    this.initializeData();  
+    this.initializeData(); // 컴포넌트가 마운트될 때 초기 데이터 설정
   },
   methods: {
+    // 초기 데이터를 설정하는 함수
     async initializeData() {
       const budgetStore = useBudgetStore();
-      await budgetStore.getTransactions();
-      // Extract unique month names from transactions
+      await budgetStore.getTransactions(); // 트랜잭션 데이터를 불러옴
+      // 트랜잭션에서 고유한 월 이름을 추출
       this.months = [...new Set(budgetStore.transactions.map(item => this.getMonthNameFromDate(item.date)))];
-      // Set default selected month
+      // 기본 선택 월 설정
       if (this.months.length > 0) {
         this.selectedMonth = this.months[0];
       }
-      // Fetch initial data based on default selected month
+      // 기본 선택 월에 따라 초기 데이터 가져오기
       this.fetchData();
     },
+    // 선택된 월에 따른 데이터를 가져오는 함수
     async fetchData() {
       const budgetStore = useBudgetStore();
       try {
@@ -61,32 +63,37 @@ export default {
           const transactionMonth = this.getMonthNameFromDate(item.date);
           return transactionMonth === this.selectedMonth;
         });
-        this.updateBarChart(transactions);
+        this.updateBarChart(transactions); // 막대 차트 업데이트
       } catch (err) {
         console.error('Error fetching data:', err);
       }
     },
+    // 월 이름 배열 반환
     getMonthNames() {
       return ["1월", "2월", "3월", "4월", "5월", "6월","7월","8월","9월", "10월","11월","12월"];
     },
+    // 날짜로부터 월 이름을 추출
     getMonthNameFromDate(date) {
       const monthNames = this.getMonthNames();
       return monthNames[new Date(date).getMonth()];
     },
+    // 막대 차트를 업데이트하는 함수
     updateBarChart(data) {
       if (this.myBarChart) {
-        this.myBarChart.destroy();
+        this.myBarChart.destroy(); // 기존 차트가 있으면 파괴
       }
-      const incomeData = data.filter(item => item.type === '입금');
-      const outcomeData = data.filter(item => item.type === '출금');
-      const weeklyIncome = [0, 0, 0, 0];
-      const weeklyOutcome = [0, 0, 0, 0];
+      const incomeData = data.filter(item => item.type === '입금'); // 입금 데이터 필터링
+      const outcomeData = data.filter(item => item.type === '출금'); // 출금 데이터 필터링
+      const weeklyIncome = [0, 0, 0, 0]; // 주간 입금 초기화
+      const weeklyOutcome = [0, 0, 0, 0]; // 주간 출금 초기화
 
+      // 주간 입금 데이터 계산
       incomeData.forEach((item, index) => {
         const weekIndex = index % 4;
         weeklyIncome[weekIndex] += parseFloat(item.amount);
       });
 
+      // 주간 출금 데이터 계산
       outcomeData.forEach((item, index) => {
         const weekIndex = index % 4;
         weeklyOutcome[weekIndex] += parseFloat(item.amount);
@@ -163,6 +170,7 @@ export default {
         }
       });
 
+      // 막대 차트 총 금액 표시 업데이트
       var barChartTotals = document.getElementById("barChartTotals");
       barChartTotals.innerHTML = '';
       this.weekLabels.forEach((week, index) => {
@@ -173,7 +181,7 @@ export default {
         barChartTotals.appendChild(totalText);
       });
 
-      // Calculate and update totalMonthlyAmount
+      // 총 월 금액 계산 및 업데이트
       this.totalMonthlyAmount = incomeData.reduce((acc, cur) => acc + parseFloat(cur.amount), 0) - outcomeData.reduce((acc, cur) => acc + parseFloat(cur.amount), 0);
     }
   }
