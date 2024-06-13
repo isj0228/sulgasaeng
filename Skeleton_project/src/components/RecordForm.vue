@@ -34,7 +34,7 @@
                 <label for="transactionCategory" class="form-label">카테고리</label>
                 <select id="transactionCategory" v-model="selectedCategory" class="form-select"
                     @change="handleCategoryChange" required>
-                    <option disabled value="">Select a category</option>
+                    <option disabled value="">카테고리</option>
                     <option v-for="category in currentCategories" :key="category" :value="category">
                         {{ category }}
                     </option>

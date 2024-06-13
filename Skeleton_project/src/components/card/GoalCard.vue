@@ -4,7 +4,7 @@
     <div class="card-body">
       <div class="row no-gutters align-items-center">
         <div class="col mr-2">
-          <div class="font-weight-bold text-warning text-uppercase mb-1">목표비용 채우기
+          <div class="font-weight-bold text-warning text-uppercase mb-1">목표금액 채우기
           </div>
           <div class="row no-gutters align-items-center">
             <div class="col-auto">
