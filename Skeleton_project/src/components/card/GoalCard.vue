@@ -79,11 +79,11 @@ watch(() => budgetStore.transactions, () => {
 updateTotalInput();
 //목표금액 변경 시 update
 const updateTargetExpenses = () => {
-  localStorage.setItem('targetExpenses', targetExpenses.value);
+  localStorage.setItem('targetIncomes', targetExpenses.value);
 };
 
 //바꾼 금액 저장해서 새로고침 해도 값 유지 가능하게 함
-const savedTarget = localStorage.getItem('targetExpenses');
+const savedTarget = localStorage.getItem('targetIncomes');
 if (savedTarget !== null) {
   targetExpenses.value = parseFloat(savedTarget);
 }
