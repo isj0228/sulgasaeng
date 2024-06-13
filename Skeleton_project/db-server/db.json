@@ -5,7 +5,8 @@
       "email": "a@a.com",
       "phone": "010",
       "image": "/img/undraw_profile_1.svg",
-      "id": "1"
+      "id": "1",
+      "pw": "1234"
     }
   ],
   "budget-list": [
