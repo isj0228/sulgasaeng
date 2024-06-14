@@ -17,21 +17,21 @@
                       <input type="file" ref="fileInput" @change="onFileChange" style="display: none;">
                     </div>
                     <div class="form-group">
-                      <label for="nameInput" class="form-label">Username</label>
+                      <label for="nameInput" class="form-label">이름</label>
                       <input ref="nameInput" id="nameInput" :value="userInfo.name" type="text"
                         class="form-control form-control-user">
                     </div>
                     <div class="form-group">
-                      <label for="emailInput" class="form-label">Useremail</label>
+                      <label for="emailInput" class="form-label">이메일</label>
                       <input ref="emailInput" id="emailInput" :value="userInfo.email" type="email"
                         class="form-control form-control-user">
                     </div>
                     <div class="form-group">
-                      <label for="phoneInput" class="form-label">Userphone</label>
+                      <label for="phoneInput" class="form-label">전화번호</label>
                       <input ref="phoneInput" id="phoneInput" :value="userInfo.phone" type="phone"
                         class="form-control form-control-user">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">Save Changes</button>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">변경하기</button>
                   </form>
                 </div>
               </div>
