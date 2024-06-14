@@ -27,7 +27,7 @@
         수정
       </button>
       <!-- Input field for "목표 소비 금액" -->
-      <div v-if="showInputField" class="input-group mb-3">
+      <div v-if="showInputField" class="input-group mt-3">
         <input type="number" class="form-control" v-model="targetExpenses" @change="updateTargetExpenses"
           placeholder="목표 소비 금액" aria-label="목표 소비 금액" aria-describedby="basic-addon2" />
         <div class="input-group-append">
