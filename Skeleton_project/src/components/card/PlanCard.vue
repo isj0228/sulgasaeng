@@ -29,7 +29,7 @@
       <button v-show="showButton" class="btn btn-primary btn-sm position-absolute top-0 end-0 mt-2 me-2"
         @click="toggleInputField">수정</button>
       <!-- "목표 소비 금액" 입력 필드 -->
-      <div v-if="showInputField" class="input-group mb-3">
+      <div v-if="showInputField" class="input-group mt-3">
         <input type="number" class="form-control" v-model="targetExpenses" @change="updateTargetExpenses"
           placeholder="목표 소비 금액" aria-label="목표 소비 금액" aria-describedby="basic-addon2">
         <div class="input-group-append">
