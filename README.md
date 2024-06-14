@@ -137,7 +137,7 @@ A: 가계부 소프트웨어는 Windows, macOS, Linux에서 작동합니다.
 ## 스크린샷
 
 ### 메인 화면
-![메인 화면](https://path-to-screenshot1)
+![localhost_5173_ (10)](https://github.com/isj0228/sulgasaeng/assets/101492513/5541f59e-2bcf-4ca2-a703-355a1adf7f98)
 
 ### 내역 조회 화면
 ![내역 조회 화면](https://path-to-screenshot2)
