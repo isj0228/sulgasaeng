@@ -16,7 +16,6 @@
       <div class="chart-bar">
         <canvas id="myBarChart"></canvas>
       </div>
-
       <div id="barChartTotals" class="mt-4"></div>
     </div>
   </div>
@@ -92,6 +91,7 @@ export default {
       });
 
       // 주간 출금 데이터 계산
+
       outcomeData.forEach((item, index) => {
         const weekIndex = index % 4;
         weeklyOutcome[weekIndex] += parseFloat(item.amount);
@@ -137,6 +137,7 @@ export default {
               },
               ticks: {
                 maxTicksLimit: 4
+
               },
               maxBarThickness: 25,
             }],
@@ -167,17 +168,19 @@ export default {
           },
         }
       });
-
+      
       // 막대 차트 총 금액 표시 업데이트
       var barChartTotals = document.getElementById("barChartTotals");
       barChartTotals.innerHTML = '';
       this.weekLabels.forEach((week, index) => {
+
         const totalAmount = weeklyIncome[index] - weeklyOutcome[index];
         const totalText = document.createElement("div");
         totalText.innerHTML = `<span>총 금액: ${totalAmount.toLocaleString()}원</span>`;
         totalText.style.textAlign = "center";
         barChartTotals.appendChild(totalText);
       });
+
 
       // 총 월 금액 계산 및 업데이트
       this.totalMonthlyAmount = incomeData.reduce((acc, cur) => acc + parseFloat(cur.amount), 0) - outcomeData.reduce((acc, cur) => acc + parseFloat(cur.amount), 0);
