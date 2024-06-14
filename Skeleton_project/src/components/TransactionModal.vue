@@ -9,22 +9,22 @@
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label for="transactionDate" class="form-label">Date</label>
+            <label for="transactionDate" class="form-label">날짜</label>
             <input id="transactionDate" v-model="editableTransaction.date" type="date" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="transactionType" class="form-label">Type</label>
+            <label for="transactionType" class="form-label">분류</label>
             <select id="transactionType" v-model="editableTransaction.type" class="form-select">
               <option value="입금">입금</option>
               <option value="출금">출금</option>
             </select>
           </div>
           <div class="mb-3">
-            <label for="transactionAmount" class="form-label">Amount</label>
+            <label for="transactionAmount" class="form-label">금액</label>
             <input id="transactionAmount" v-model="editableTransaction.amount" type="number" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="transactionCategory" class="form-label">Category</label>
+            <label for="transactionCategory" class="form-label">카테고리</label>
             <select id="transactionCategory" v-model="selectedCategory" class="form-select" @change="handleCategoryChange">
               <option disabled value="">Select a category</option>
               <option v-for="category in currentCategories" :key="category" :value="category">
@@ -37,14 +37,14 @@
             </div>
           </div>
           <div class="mb-3">
-            <label for="transactionDesc" class="form-label">Description</label>
+            <label for="transactionDesc" class="form-label">내용</label>
             <textarea v-model="editableTransaction.desc" class="form-control" id="transactionDesc" rows="3"></textarea>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" @click="deleteTransaction">Delete</button>
-          <button type="button" class="btn btn-primary" @click="saveChanges">Save Changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+          <button type="button" class="btn btn-danger" @click="deleteTransaction">삭제</button>
+          <button type="button" class="btn btn-primary" @click="saveChanges">변경 저장</button>
         </div>
       </div>
     </div>

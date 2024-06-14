@@ -8,7 +8,7 @@
               <div class="col-lg-12">
                 <div class="p-5">
                   <div class="text-center">
-                    <h2 class="h4 text-gray-900 mb-4">Edit Profile</h2>
+                    <h2 class="h4 text-gray-900 mb-4">프로필 수정</h2>
                   </div>
                   <form class="user" @submit.prevent="updateHandler">
                     <div class="profile-info mb-4">
@@ -109,15 +109,4 @@ const onFileChange = (event) => {
   justify-content: center;
 }
 
-.profile-photo {
-  width: 100px;
-  height: 100px;
-  transition: box-shadow 0.3s ease;
-  /* 부드러운 전환 효과 */
-}
-
-.profile-photo:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* 그림자 효과 */
-}
 </style>

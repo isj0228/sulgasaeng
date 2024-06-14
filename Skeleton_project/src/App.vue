@@ -1,11 +1,10 @@
 <template>
   <div id="wrapper">
-    <!-- <Sidebar /> -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <Topbar />
-        <div class="container-fluid px-5">
-          <router-view/>
+        <div class="container-fluid container-padding-x">
+          <router-view />
         </div>
       </div>
     </div>
@@ -14,14 +13,15 @@
 
 <script setup>
 import Topbar from '@/components/nav/Topbar.vue'
-// import Sidebar from '@/components/nav/Sidebar.vue'
-
 import { useUserStore } from '@/stores/userStore.js'
 const { fetchUser } = useUserStore();
 fetchUser();
 
 </script>
 
-<!-- <script setup>
-// import { reactive, computed, provide } from 'vue';
-</script> -->
+<style>
+.container-padding-x {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+</style>

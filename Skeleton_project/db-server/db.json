@@ -4,7 +4,7 @@
       "name": "park",
       "email": "a@a.com",
       "phone": "010",
-      "image": "/img/image1.png",
+      "image": "/img/undraw_profile_1.svg",
       "id": "1"
     }
   ],
@@ -13,17 +13,9 @@
       "id": "2",
       "date": "2024-06-02",
       "type": "출금",
-      "amount": "150",
+      "amount": 150,
       "category": "교통비",
       "desc": "버스 요금"
-    },
-    {
-      "id": "3",
-      "date": "2024-06-03",
-      "type": "입금",
-      "amount": 20022,
-      "category": "불로소득",
-      "desc": "배당금"
     },
     {
       "id": "4",
@@ -37,57 +29,185 @@
       "id": "5",
       "date": "2024-06-05",
       "type": "출금",
-      "amount": "500",
+      "amount": 500,
       "category": "주거비",
       "desc": "월세"
-    },
-    {
-      "id": "6",
-      "date": "2024-06-06",
-      "type": "입금",
-      "amount": "100",
-      "category": "기타",
-      "desc": "프리랜서 일"
     },
     {
       "id": "7",
       "date": "2024-06-07",
       "type": "출금",
-      "amount": "200",
+      "amount": 200,
       "category": "오락/취미",
       "desc": "영화 관람"
-    },
-    {
-      "id": "8",
-      "date": "2024-06-08",
-      "type": "입금",
-      "amount": "50",
-      "category": "기타",
-      "desc": "용돈"
-    },
-    {
-      "id": "9",
-      "date": "2024-06-09",
-      "type": "입금",
-      "amount": "100",
-      "category": "불로소득",
-      "desc": "배당금"
     },
     {
       "id": "10",
       "date": "2024-06-10",
       "type": "출금",
-      "amount": "80",
+      "amount": 80,
       "category": "기타",
       "desc": "커피 구매"
     },
     {
-      "id": "7ebc",
+      "id": "5b61",
+      "date": "2024-05-01",
+      "type": "출금",
+      "amount": 10000,
+      "category": "식비",
+      "desc": "맥날"
+    },
+    {
+      "id": "ce3b",
+      "date": "2024-06-14",
+      "type": "출금",
+      "amount": 100000,
+      "category": "식비",
+      "desc": "밥"
+    },
+    {
+      "id": "a814",
+      "date": "2024-06-11",
+      "type": "출금",
+      "amount": 100000,
+      "category": "식비",
+      "desc": "밥"
+    },
+    {
+      "id": "2134",
+      "date": "2024-06-12",
+      "type": "출금",
+      "amount": 1111111,
+      "category": "오락/취미",
+      "desc": "게임"
+    },
+    {
+      "id": "7f6e",
+      "date": "2024-06-11",
+      "type": "출금",
+      "amount": 111111,
+      "category": "주거비",
+      "desc": "집"
+    },
+    {
+      "id": "11b9",
+      "date": "2024-06-15",
+      "type": "출금",
+      "amount": 111111,
+      "category": "교통비",
+      "desc": "집"
+    },
+    {
+      "id": "d9d4",
+      "date": "2024-06-10",
+      "type": "출금",
+      "amount": 10000,
+      "category": "오락/취미",
+      "desc": "재미"
+    },
+    {
+      "id": "6d51",
+      "date": "2024-06-12",
+      "type": "출금",
+      "amount": 22222,
+      "category": "식비",
+      "desc": ""
+    },
+    {
+      "id": "0d66",
+      "date": "2024-06-21",
+      "type": "출금",
+      "amount": 121312321,
+      "category": "교통비",
+      "desc": ""
+    },
+    {
+      "id": "a48d",
+      "date": "2024-06-11",
+      "type": "입금",
+      "amount": 30000,
+      "category": "주가",
+      "desc": ""
+    },
+    {
+      "id": "5e26",
+      "date": "2024-06-11",
+      "type": "입금",
+      "amount": 200000,
+      "category": "주가",
+      "desc": ""
+    },
+    {
+      "id": "0ae1",
       "date": "2024-06-19",
       "type": "입금",
-      "amount": 10999,
-      "category": "근로소득",
-      "desc": "월급"
+      "amount": 10000,
+      "category": "주가",
+      "desc": ""
+    },
+    {
+      "id": "61ca",
+      "date": "2024-06-10",
+      "type": "입금",
+      "amount": 10000,
+      "category": "주가",
+      "desc": ""
+    },
+    {
+      "id": "2be8",
+      "date": "2024-06-05",
+      "type": "입금",
+      "amount": 100000,
+      "category": "주가",
+      "desc": ""
+    },
+    {
+      "id": "aade",
+      "date": "2024-05-14",
+      "type": "입금",
+      "amount": 10000000,
+      "category": "주가",
+      "desc": ""
+    },
+    {
+      "id": "8967",
+      "date": "2024-06-19",
+      "type": "입금",
+      "amount": 1000000,
+      "category": "주가",
+      "desc": ""
+    },
+    {
+      "id": "59d9",
+      "date": "2024-05-17",
+      "type": "입금",
+      "amount": 3000000,
+      "category": "주가",
+      "desc": ""
+    },
+    {
+      "id": "b867",
+      "date": "2024-06-04",
+      "type": "출금",
+      "amount": 100000000,
+      "category": "오락/취미",
+      "desc": ""
+    },
+    {
+      "id": "d9cd",
+      "date": "2024-06-11",
+      "type": "출금",
+      "amount": 10000000,
+      "category": "식비",
+      "desc": ""
+    },
+    {
+      "id": "bf51",
+      "date": "2024-06-18",
+      "type": "출금",
+      "amount": 239999999,
+      "category": "교통비",
+      "desc": ""
     }
   ]
 }
