@@ -7,13 +7,21 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="p-5">
+                  <!-- <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="changeSuccess">
+                    <strong>{{ userInfo.name }}님</strong> 변경이 완료되었습니다.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div> -->
+                  <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="changeSuccess">
+                    <strong>{{ userInfo.name }}님</strong> 변경이 완료되었습니다.
+                    <button type="button" class="btn-close" @click="closeAlert" aria-label="Close"></button>
+                  </div>
                   <div class="text-center">
                     <h2 class="h4 text-gray-900 mb-4">프로필 수정</h2>
                   </div>
                   <form class="user" @submit.prevent="updateHandler">
                     <div class="profile-info mb-4">
-                      <img @click="triggerFileInput" :src="imageInput" class="profile-photo rounded-circle mb-3" alt="Profile Photo"
-                        style="width: 100px; height: 100px;">
+                      <img @click="triggerFileInput" :src="imageInput" class="profile-photo rounded-circle mb-3"
+                        alt="Profile Photo" style="width: 100px; height: 100px;">
                       <input type="file" ref="fileInput" @change="onFileChange" style="display: none;">
                     </div>
                     <div class="form-group">
@@ -56,6 +64,7 @@ const fileInput = ref(null);
 const nameInput = ref(null);
 const emailInput = ref(null);
 const phoneInput = ref(null);
+const changeSuccess = ref(false);
 
 const updateHandler = () => {
   const inputValues = {
@@ -80,7 +89,8 @@ const updateHandler = () => {
     return;
   }
   updateUser({ ...inputValues }, () => {
-    alert('변경이 완료되었습니다.')
+    // alert('변경이 완료되었습니다.')
+    toggleAlert();
   });
 }
 
@@ -92,13 +102,21 @@ const triggerFileInput = () => {
 const onFileChange = (event) => {
   const file = event.target.files[0];
   if (file) {
-    
+
     const reader = new FileReader();
     reader.onload = (e) => {
       imageInput.value = `/img/${file.name}`;
     };
     reader.readAsDataURL(file);
   }
+};
+
+const toggleAlert = () => {
+  changeSuccess.value = !changeSuccess.value;
+};
+
+const closeAlert = () => {
+  changeSuccess.value = false;
 };
 </script>
 
@@ -108,5 +126,4 @@ const onFileChange = (event) => {
   align-items: center;
   justify-content: center;
 }
-
 </style>
