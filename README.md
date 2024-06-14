@@ -140,4 +140,10 @@ A: 가계부 소프트웨어는 Windows, macOS, Linux에서 작동합니다.
 ![localhost_5173_ (10)](https://github.com/isj0228/sulgasaeng/assets/101492513/5541f59e-2bcf-4ca2-a703-355a1adf7f98)
 
 ### 내역 조회 화면
-![내역 조회 화면](https://path-to-screenshot2)
+![localhost_5173_ (6)](https://github.com/isj0228/sulgasaeng/assets/101492513/2964685f-fab9-453c-98b4-6720ef12eeb3)
+
+### 차트 조회 화면
+![localhost_5173_chart](https://github.com/isj0228/sulgasaeng/assets/101492513/52ea11bb-132e-49ef-90d1-8169b5fa48b4)
+
+### 유저 조회 화면
+![localhost_5173_user (1)](https://github.com/isj0228/sulgasaeng/assets/101492513/39cd3af5-f1dc-4184-b666-8abab170c357)
